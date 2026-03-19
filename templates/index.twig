@@ -1,0 +1,12 @@
+{% extends 'layouts/base.twig' %}
+
+{% block content %}
+    <h1>{{ 'general.welcome' | trans({'%site_name%': site.name}) }}</h1>
+    <p>{{ 'general.skeleton_message' | trans }}</p>
+
+    <div class="product-grid">
+        {% for product in collections.frontpage.products %}
+            {% include 'snippets/product-card.twig' with { product: product } %}
+        {% endfor %}
+    </div>
+{% endblock %}

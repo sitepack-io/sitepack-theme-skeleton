@@ -1,0 +1,20 @@
+{% extends 'layouts/base.twig' %}
+
+{% block content %}
+    <div class="product-detail">
+        <h1>{{ product.title }}</h1>
+        <div class="product-image">
+            <img src="{{ product.featured_image | img_url('large') }}" alt="{{ product.title }}">
+        </div>
+        <div class="product-info">
+            <p class="price">{{ product.price | money }}</p>
+            <div class="description">
+                {{ product.description }}
+            </div>
+            <form action="/cart/add" method="post">
+                <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+                <button type="submit">{{ 'product.add_to_cart' | trans }}</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

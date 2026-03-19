@@ -1,0 +1,23 @@
+{% extends 'layouts/base.twig' %}
+
+{% block content %}
+    <h1>{{ blog.title }}</h1>
+    
+    <div class="blog-posts">
+        {% for article in blog.articles %}
+            <article class="blog-post-summary">
+                <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>
+                <p class="article-meta">{{ 'general.published_on' | trans({'%date%': article.published_at | date('M d, Y')}) }}</p>
+                {% if article.image %}
+                    <img src="{{ article.image | img_url('medium') }}" alt="{{ article.title }}">
+                {% endif %}
+                <div class="article-excerpt">
+                    {{ article.excerpt | default(article.content | truncate(200)) }}
+                </div>
+                <a href="{{ article.url }}">{{ 'general.read_more' | trans }}</a>
+            </article>
+        {% else %}
+            <p>{{ 'general.no_posts' | trans }}</p>
+        {% endfor %}
+    </div>
+{% endblock %}

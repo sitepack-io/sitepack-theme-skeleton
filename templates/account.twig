@@ -1,0 +1,41 @@
+{% extends 'layouts/base.twig' %}
+
+{% block content %}
+    <h1>{{ 'account.title' | trans }}</h1>
+    
+    <div class="account-dashboard">
+        <h2>{{ 'account.welcome_customer' | trans({'%name%': customer.first_name ~ ' ' ~ customer.last_name}) }}</h2>
+        <p>{{ 'account.email' | trans({'%email%': customer.email}) }}</p>
+        
+        <h3>{{ 'account.orders' | trans }}</h3>
+        <div class="order-history">
+            {% for order in customer.orders %}
+                <div class="order-item">
+                    <p>{{ 'account.order_item' | trans({'%id%': order.id, '%date%': order.created_at | date('M d, Y'), '%status%': order.status}) }}</p>
+                    <a href="{{ order.url }}">{{ 'account.view_details' | trans }}</a>
+                </div>
+            {% else %}
+                <p>{{ 'account.no_orders' | trans }}</p>
+            {% endfor %}
+        </div>
+        
+        <h3>{{ 'account.addresses' | trans }}</h3>
+        <div class="account-addresses">
+            {% if customer.addresses %}
+                {% for address in customer.addresses %}
+                    <div class="address-item">
+                        <p>{{ address.street }} {{ address.house_number }}</p>
+                        <p>{{ address.zipcode }} {{ address.city }}</p>
+                        <p>{{ address.country }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>{{ 'account.no_addresses' | trans }}</p>
+            {% endif %}
+        </div>
+        
+        <div class="account-actions">
+            <a href="/account/logout">{{ 'account.logout' | trans }}</a>
+        </div>
+    </div>
+{% endblock %}

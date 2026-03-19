@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="{{ site.locale }}">
+<head>
+    <meta charset="UTF-8">
+    {{ sitepack_head() }}
+
+    <link rel="stylesheet" href="{{ 'css/theme.css' | asset_url }}">
+</head>
+<body class="{{ body_class }}">
+{% include 'snippets/header.twig' %}
+
+<main>
+    {% block content %}{% endblock %}
+</main>
+
+{% include 'snippets/footer.twig' %}
+
+{{ sitepack_scripts() }}
+<script src="{{ 'js/theme.js' | asset_url }}"></script>
+</body>
+</html>

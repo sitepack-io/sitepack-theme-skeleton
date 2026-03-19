@@ -1,0 +1,12 @@
+{
+  "id": "sitepack-default-skeleton",
+  "name": "Base Skeleton",
+  "author": "SitePack Team",
+  "version": "1.0.0",
+  "supported_features": [
+    "webshop",
+    "blog",
+    "wishlist"
+  ],
+  "preview_image": "assets/img/preview.png"
+}

@@ -1,0 +1,18 @@
+{% extends 'layouts/base.twig' %}
+
+{% block content %}
+    <h1>{{ category.title }}</h1>
+    {% if category.description %}
+        <div class="category-description">
+            {{ category.description }}
+        </div>
+    {% endif %}
+
+    <div class="product-grid">
+        {% for product in category.products %}
+            {% include 'snippets/product-card.twig' with { product: product } %}
+        {% else %}
+            <p>{{ 'general.no_products' | trans }}</p>
+        {% endfor %}
+    </div>
+{% endblock %}

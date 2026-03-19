@@ -1,0 +1,49 @@
+{
+  "general": {
+    "search": "Zoeken...",
+    "cart": "Winkelwagen",
+    "welcome": "Welkom bij %site_name%",
+    "skeleton_message": "Dit is je nieuwe SitePack theme skeleton.",
+    "no_products": "Geen producten gevonden in deze categorie.",
+    "no_posts": "Geen berichten gevonden in dit blog.",
+    "read_more": "Lees meer",
+    "published_on": "Gepubliceerd op %date%",
+    "by": "door %author%",
+    "back_to": "Terug naar %title%"
+  },
+  "product": {
+    "add_to_cart": "In winkelwagen",
+    "out_of_stock": "Niet op voorraad",
+    "price_from": "Vanaf %price%"
+  },
+  "cart": {
+    "title": "Winkelwagen",
+    "product": "Product",
+    "price": "Prijs",
+    "quantity": "Aantal",
+    "total": "Totaal",
+    "remove": "Verwijderen",
+    "subtotal": "Subtotaal: %price%",
+    "update": "Winkelwagen bijwerken",
+    "checkout": "Afrekenen",
+    "empty": "Je winkelwagen is momenteel leeg.",
+    "continue_shopping": "Verder winkelen"
+  },
+  "account": {
+    "title": "Mijn account",
+    "welcome_customer": "Welkom, %name%",
+    "email": "E-mail: %email%",
+    "orders": "Bestellingen",
+    "order_item": "Bestelling #%id% - %date% - Status: %status%",
+    "view_details": "Details bekijken",
+    "no_orders": "Je hebt nog geen bestellingen geplaatst.",
+    "addresses": "Adressen",
+    "no_addresses": "Geen adressen gevonden.",
+    "logout": "Uitloggen"
+  },
+  "error": {
+    "404_title": "Pagina niet gevonden (404)",
+    "404_message": "Sorry, de pagina die je zoekt bestaat niet.",
+    "return_home": "Terug naar Home"
+  }
+}

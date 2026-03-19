@@ -1,0 +1,28 @@
+{% extends 'layouts/base.twig' %}
+
+{% block content %}
+    <article class="blog-post">
+        <h1>{{ article.title }}</h1>
+        <p class="article-meta">{{ 'general.published_on' | trans({'%date%': article.published_at | date('M d, Y')}) }} {{ 'general.by' | trans({'%author%': article.author}) }}</p>
+        
+        {% if article.image %}
+            <div class="article-image">
+                <img src="{{ article.image | img_url('large') }}" alt="{{ article.title }}">
+            </div>
+        {% endif %}
+        
+        <div class="article-content">
+            {{ article.content }}
+        </div>
+        
+        <div class="article-tags">
+            {% for tag in article.tags %}
+                <span class="tag">{{ tag }}</span>
+            {% endfor %}
+        </div>
+        
+        <div class="article-navigation">
+            <a href="{{ blog.url }}">{{ 'general.back_to' | trans({'%title%': blog.title}) }}</a>
+        </div>
+    </article>
+{% endblock %}

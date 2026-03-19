@@ -1,0 +1,49 @@
+{
+  "general": {
+    "search": "Search...",
+    "cart": "Cart",
+    "welcome": "Welcome to %site_name%",
+    "skeleton_message": "This is your new SitePack theme skeleton.",
+    "no_products": "No products found in this category.",
+    "no_posts": "No posts found in this blog.",
+    "read_more": "Read more",
+    "published_on": "Published on %date%",
+    "by": "by %author%",
+    "back_to": "Back to %title%"
+  },
+  "product": {
+    "add_to_cart": "Add to cart",
+    "out_of_stock": "Out of stock",
+    "price_from": "From %price%"
+  },
+  "cart": {
+    "title": "Shopping Cart",
+    "product": "Product",
+    "price": "Price",
+    "quantity": "Quantity",
+    "total": "Total",
+    "remove": "Remove",
+    "subtotal": "Subtotal: %price%",
+    "update": "Update Cart",
+    "checkout": "Proceed to Checkout",
+    "empty": "Your cart is currently empty.",
+    "continue_shopping": "Continue Shopping"
+  },
+  "account": {
+    "title": "My Account",
+    "welcome_customer": "Welcome, %name%",
+    "email": "Email: %email%",
+    "orders": "Orders",
+    "order_item": "Order #%id% - %date% - Status: %status%",
+    "view_details": "View details",
+    "no_orders": "You haven't placed any orders yet.",
+    "addresses": "Addresses",
+    "no_addresses": "No addresses found.",
+    "logout": "Logout"
+  },
+  "error": {
+    "404_title": "Page Not Found (404)",
+    "404_message": "Sorry, the page you are looking for does not exist.",
+    "return_home": "Return to Home"
+  }
+}
