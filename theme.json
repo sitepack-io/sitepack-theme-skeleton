@@ -1,8 +1,8 @@
 {
-  "id": "sitepack-default-skeleton",
+  "uuid": "[generated-in-cli]",
   "name": "Base Skeleton",
   "author": "SitePack Team",
-  "version": "1.0.0",
+  "version": "1",
   "supported_features": [
     "webshop",
     "blog",
