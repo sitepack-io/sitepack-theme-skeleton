@@ -16,11 +16,11 @@ This is a new theme skeleton for SitePack. This package is open-source and re-us
 
 ## Getting Started
 
-The typical development workflow for a SitePack theme looks like this:
+The typical development workflow for a SitePack theme requires the **SitePack CLI**. It must be used for new themes with `sitepack theme:init` and to build/sync themes using `sitepack theme:watch`.
 
 1.  **Install the SitePack CLI**: Follow the [installation instructions](https://sitepack.dev/docs/cli/installation) to set up the CLI on your machine.
 2.  **Initialize**: Start a new project with `sitepack theme:init`.
-3.  **Develop**: Use the CLI to develop locally and see your changes in real-time.
+3.  **Develop & Build**: Use the CLI to develop locally and see your changes in real-time. Use `sitepack theme:watch` to sync your changes with SitePack servers and build your theme. This command uses the `.sitepackignore` file to determine which files should not be synced.
 4.  **Preview**: Test your theme on a development store to ensure everything looks perfect.
 5.  **Package & Upload**: Once ready, package your theme and upload it to the SitePack Marketplace.
 
@@ -31,6 +31,7 @@ The typical development workflow for a SitePack theme looks like this:
 - `snippets/`: Reusable code snippets (e.g., header, footer).
 - `templates/`: Main page templates (e.g., home, product, category, blog, account, cart).
 - `theme.json`: Theme metadata and supported features.
+- `.sitepackignore`: Files and folders to ignore when syncing with SitePack servers.
 
 ## Contributing
 

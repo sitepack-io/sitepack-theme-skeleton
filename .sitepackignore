@@ -2,3 +2,5 @@
 .DS_Store
 .idea
 .git
+node_modules
+vendor
