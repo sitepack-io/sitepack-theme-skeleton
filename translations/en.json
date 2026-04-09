@@ -14,7 +14,15 @@
   "product": {
     "add_to_cart": "Add to cart",
     "out_of_stock": "Out of stock",
-    "price_from": "From %price%"
+    "price_from": "From %price%",
+    "sku": "SKU",
+    "category": "Category",
+    "download_pdf": "Download PDF",
+    "description": "Description",
+    "specifications": "Specifications",
+    "downloads": "Downloads",
+    "cross_sells": "Customers also bought",
+    "related_products": "Related products"
   },
   "cart": {
     "title": "Shopping Cart",
@@ -40,6 +48,18 @@
     "addresses": "Addresses",
     "no_addresses": "No addresses found.",
     "logout": "Logout"
+  },
+  "sitemap": {
+    "title": "Sitemap",
+    "pages": "Pages",
+    "blogs": "Blogs",
+    "categories": "Categories",
+    "products": "Products"
+  },
+  "category": {
+    "filters_title": "Filters",
+    "show_filters": "Show filters",
+    "hide_filters": "Hide filters"
   },
   "error": {
     "404_title": "Page Not Found (404)",

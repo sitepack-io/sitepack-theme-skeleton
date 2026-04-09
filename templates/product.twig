@@ -1,20 +1,194 @@
 {% extends 'layouts/base.twig' %}
 
 {% block content %}
-    <div class="product-detail">
-        <h1>{{ product.title }}</h1>
-        <div class="product-image">
-            <img src="{{ product.featured_image | img_url('large') }}" alt="{{ product.title }}">
+
+    {% if product.categorySubSub %}
+        <div class="container-element product-extra-info">
+            <p>
+                &laquo; <a href="{{ product.categorySubSub.url }}">{{ product.categorySubSub.name }}</a>
+            </p>
         </div>
-        <div class="product-info">
-            <p class="price">{{ product.price | money }}</p>
-            <div class="description">
-                {{ product.description }}
+    {% elseif product.categorySub %}
+        <div class="container-element product-extra-info">
+            <p>
+                &laquo; <a href="{{ product.categorySub.url }}">{{ product.categorySub.name }}</a>
+            </p>
+        </div>
+    {% elseif product.categoryMain %}
+        <div class="container-element product-extra-info">
+            <p>
+                &laquo; <a href="{{ product.categoryMain.url }}">{{ product.categoryMain.name }}</a>
+            </p>
+        </div>
+    {% endif %}
+
+    <article class="product-detail">
+        <div class="product-gallery">
+            {% app_block 'product_gallery_before' %}
+            {% app_block 'product_image_before' %}
+            <div class="product-image-grid">
+                {% for image in product.images %}
+                    <div class="product-image-item">
+                        <img src="{{ image.url }}" alt="{{ image.altText }}" draggable="false">
+                    </div>
+                {% endfor %}
             </div>
-            <form action="/cart/add" method="post">
-                <input type="hidden" name="id" value="{{ product.variants.first.id }}">
-                <button type="submit">{{ 'product.add_to_cart' | trans }}</button>
-            </form>
+            {% app_block 'product_image_after' %}
+            {% app_block 'product_gallery_after' %}
         </div>
-    </div>
+
+        <div class="product-info-column">
+            {% app_block 'product_details_before' %}
+
+            <div class="product-header">
+                <h1 class="product-title">{{ product.name }}</h1>
+                <div class="product-price-section">
+                    {% app_block 'product_price_before' %}
+
+                    {% if product.priceAdvisedCents > 0 and product.priceAdvisedCents > product.priceCents %}
+                        <span class="advised-price">{{ sitepack_price(product.priceAdvisedCents) }}</span>
+                    {% endif %}
+
+                    {% if product.pricePromoCents > 0 %}
+                        <span class="promo-price">{{ sitepack_price(product.pricePromoCents) }}</span>
+                    {% else %}
+                        <span class="price">{{ sitepack_price(product.priceCents) }}</span>
+                    {% endif %}
+
+                    {% app_block 'product_price_after' %}
+                </div>
+            </div>
+
+            <div class="product-meta">
+                {% app_block 'product_meta_before' %}
+                {% if product.brand %}
+                    <span>
+                        {{ product.brand }}
+                    </span>
+                {% endif %}
+                {% if product.sku %}
+                    | {{ 'product.sku' | trans }}: <span>{{ product.sku }}</span>
+                {% endif %}
+                {% app_block 'product_meta_after' %}
+            </div>
+
+            {% app_block 'product_stock_before' %}
+            <div class="product-stock-info" data-product-id="{{ product.uuid }}"></div>
+            {% app_block 'product_stock_after' %}
+
+            {% if product.shortDescription %}
+                {% app_block 'product_short_description_before' %}
+                <div class="product-short-description">
+                    {{ product.shortDescription | raw }}
+                </div>
+                {% app_block 'product_short_description_after' %}
+            {% endif %}
+
+            <div class="product-actions">
+                {% if not product.disableProductSales %}
+                    <form action="/cart/add" method="post" class="product-add-to-cart">
+                        {% app_block 'product_form_before' %}
+
+                        {# Simplified variant handling #}
+                        {% if product.variants.totalProducts > 1 %}
+                            <div class="product-variants">
+                                {# You would typically loop through attributes here #}
+                            </div>
+                        {% endif %}
+
+                        <input type="hidden" name="id" value="{{ product.uuid }}">
+                        <button type="submit" class="btn-primary" disabled>
+                            {{ 'product.add_to_cart' | trans }}
+                        </button>
+
+                        {% app_block 'product_form_after' %}
+                    </form>
+                {% endif %}
+            </div>
+
+            {% app_block 'product_usps' %}
+
+            <div class="product-accordions">
+                <details class="product-accordion">
+                    <summary class="accordion-header">
+                        {{ 'product.description' | trans }}
+                        <span class="accordion-icon"></span>
+                    </summary>
+                    <div class="accordion-content">
+                        {% app_block 'product_description_before' %}
+                        {{ product.description | raw }}
+                        {% app_block 'product_description_after' %}
+                    </div>
+                </details>
+
+                {% if product.facets %}
+                    {% app_block 'product_specifications_before' %}
+                    <details class="product-accordion">
+                        <summary class="accordion-header">
+                            {{ 'product.specifications' | trans }}
+                            <span class="accordion-icon"></span>
+                        </summary>
+                        <div class="accordion-content">
+                            <div class="product-facets">
+                                {% for facet in product.facets %}
+                                    <div class="facet-item">
+                                        <span class="facet-label">{{ facet.name }}:</span>
+                                        <span class="facet-value">{{ facet.value }}</span>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </details>
+                    {% app_block 'product_specifications_after' %}
+                {% endif %}
+
+                {% if product.pdf %}
+                    {% app_block 'product_downloads_before' %}
+                    <details class="product-accordion">
+                        <summary class="accordion-header">
+                            {{ 'product.downloads' | trans }}
+                            <span class="accordion-icon"></span>
+                        </summary>
+                        <div class="accordion-content">
+                            <p><a href="{{ product.pdf }}" target="_blank"
+                                  class="btn-secondary">{{ 'product.download_pdf' | trans }}</a></p>
+                        </div>
+                    </details>
+                    {% app_block 'product_downloads_after' %}
+                {% endif %}
+            </div>
+
+            {% app_block 'product_details_after' %}
+        </div>
+    </article>
+
+    {% if product_cross_sell %}
+        {% app_block 'product_recommendations_before' %}
+        <section class="product-recommendations">
+            <div class="container-element">
+                <h2>{{ 'product.cross_sells' | trans }}</h2>
+                <div class="product-recommendations-grid">
+                    {% for item in product_cross_sell %}
+                        {% include 'snippets/product-card.twig' with {'product': item} %}
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+        {% app_block 'product_recommendations_after' %}
+    {% endif %}
+
+    {% if product_related %}
+        {% app_block 'product_recommendations_before' %}
+        <section class="product-recommendations">
+            <div class="container-element">
+                <h2>{{ 'product.related_products' | trans }}</h2>
+                <div class="product-recommendations-grid">
+                    {% for item in product_related %}
+                        {% include 'snippets/product-card.twig' with {'product': item} %}
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+        {% app_block 'product_recommendations_after' %}
+    {% endif %}
 {% endblock %}

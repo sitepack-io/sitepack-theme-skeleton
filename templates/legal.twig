@@ -1,0 +1,7 @@
+{% extends 'layouts/base.twig' %}
+
+{% block content %}
+    {% app_block 'legal_page_before' %}
+    {{ sitepack_content_legal() }}
+    {% app_block 'legal_page_after' %}
+{% endblock %}

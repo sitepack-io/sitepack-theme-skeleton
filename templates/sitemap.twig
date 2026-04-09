@@ -1,0 +1,51 @@
+{% extends 'layouts/base.twig' %}
+
+{% block content %}
+    <div class="sitemap">
+        <h1>{{ 'sitemap.title' | trans }}</h1>
+
+        {% if sitemap.content is not empty %}
+            <section>
+                <h2>{{ 'sitemap.pages' | trans }}</h2>
+                <ul>
+                    {% for page in sitemap.content %}
+                        <li><a href="{{ page.url }}">{{ page.label }}</a></li>
+                    {% endfor %}
+                </ul>
+            </section>
+        {% endif %}
+
+        {% if sitemap.blogs is not empty %}
+            <section>
+                <h2>{{ 'sitemap.blogs' | trans }}</h2>
+                <ul>
+                    {% for blog in sitemap.blogs %}
+                        <li><a href="{{ blog.url }}">{{ blog.label }}</a></li>
+                    {% endfor %}
+                </ul>
+            </section>
+        {% endif %}
+
+        {% if sitemap.categories is not empty %}
+            <section>
+                <h2>{{ 'sitemap.categories' | trans }}</h2>
+                <ul>
+                    {% for category in sitemap.categories %}
+                        <li><a href="{{ category.url }}">{{ category.label }}</a></li>
+                    {% endfor %}
+                </ul>
+            </section>
+        {% endif %}
+
+        {% if sitemap.products is not empty %}
+            <section>
+                <h2>{{ 'sitemap.products' | trans }}</h2>
+                <ul>
+                    {% for product in sitemap.products %}
+                        <li><a href="{{ product.url }}">{{ product.label }}</a></li>
+                    {% endfor %}
+                </ul>
+            </section>
+        {% endif %}
+    </div>
+{% endblock %}

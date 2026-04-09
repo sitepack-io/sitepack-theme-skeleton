@@ -1,7 +1,27 @@
 <div class="product-card">
+    {% app_block 'product_card_before' %}
     <a href="{{ product.url }}">
-        <img src="{{ product.featured_image | img_url('medium') }}" alt="{{ product.title }}">
-        <h3>{{ product.title }}</h3>
-        <p>{{ product.price | money }}</p>
+        {% app_block 'product_card_image_before' %}
+        <div class="product-image">
+            <img src="{{ product.first_image.thumbnail }}" alt="{{ product.first_image.alt_text }}"/>
+        </div>
+        {% app_block 'product_card_info_before' %}
+        <div class="product-title">
+            <h3>{{ product.name }}</h3>
+        </div>
+        <div class="product-price">
+            {% if product.pricePromoCents > 0 and product.priceCents > product.pricePromoCents %}
+                <span class="old-price">{{ sitepack_price(product.priceCents) }}</span>
+                <span class="new-price">{{ sitepack_price(product.pricePromoCents) }}</span>
+            {% elseif product.priceAdvisedCents > 0 and product.priceAdvisedCents > product.priceCents %}
+                <span class="old-price">{{ sitepack_price(product.priceAdvisedCents) }}</span>
+                <span class="new-price">{{ sitepack_price(product.priceCents) }}</span>
+            {% else %}
+                <span class="new-price">{{ sitepack_price(product.priceCents) }}</span>
+            {% endif %}
+        </div>
+        <div class="product-stock-info" data-product-id="{{ product.uuid }}"></div>
+        {% app_block 'product_card_info_after' %}
     </a>
+    {% app_block 'product_card_after' %}
 </div>

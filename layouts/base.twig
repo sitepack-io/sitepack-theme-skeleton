@@ -3,20 +3,34 @@
 <head>
     <title>{{ sitepack_title() }}</title>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     {{ sitepack_head() }}
-
     <link rel="stylesheet" href="{{ 'css/theme.css' | asset_url }}">
+    {% app_block 'head_after' %}
 </head>
 <body class="{{ body_class }}">
+{% app_block 'body_start' %}
 {% include 'snippets/header.twig' %}
 
 <main>
     {% block content %}{% endblock %}
 </main>
 
+{{ sitepack_breadcrumbs() }}
+
 {% include 'snippets/footer.twig' %}
 
+{{ sitepack_cookies() }}
 {{ sitepack_scripts() }}
+<script>
+    window.SITEPACK_TRANS = {
+        category: {
+            show_filters: "{{ 'category.show_filters'|trans|escape('js') }}",
+            hide_filters: "{{ 'category.hide_filters'|trans|escape('js') }}"
+        }
+    };
+</script>
 <script src="{{ 'js/theme.js' | asset_url }}"></script>
+{% app_block 'body_end' %}
 </body>
 </html>

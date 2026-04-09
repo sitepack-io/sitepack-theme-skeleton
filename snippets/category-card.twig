@@ -1,0 +1,26 @@
+<div class="category-card">
+    <a href="{{ category.url|ensure_link }}" class="category-card__link">
+        <div class="category-card__image-wrapper">
+            <div class="category-card__image">
+                {% if category.backgroundImage %}
+                    <img src="{{ category.backgroundImage }}" alt="{{ category.categoryName }}" loading="lazy" />
+                {% else %}
+                    <div class="category-card__image-placeholder"></div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="category-card__info">
+            <h3 class="category-card__title">
+                {% if category.label != '' %}
+                    {{ category.label }}
+                {% else %}
+                    {{ category.categoryName }}
+                {% endif %}
+            </h3>
+            <span class="category-card__arrow">
+                {{ sitepack_icon('angle-right-solid') }}
+            </span>
+        </div>
+    </a>
+</div>

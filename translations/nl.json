@@ -14,7 +14,15 @@
   "product": {
     "add_to_cart": "In winkelwagen",
     "out_of_stock": "Niet op voorraad",
-    "price_from": "Vanaf %price%"
+    "price_from": "Vanaf %price%",
+    "sku": "Artikelnummer",
+    "category": "Categorie",
+    "download_pdf": "PDF downloaden",
+    "description": "Omschrijving",
+    "specifications": "Specificaties",
+    "downloads": "Downloads",
+    "cross_sells": "Anderen kochten ook",
+    "related_products": "Gerelateerde producten"
   },
   "cart": {
     "title": "Winkelwagen",
@@ -40,6 +48,18 @@
     "addresses": "Adressen",
     "no_addresses": "Geen adressen gevonden.",
     "logout": "Uitloggen"
+  },
+  "sitemap": {
+    "title": "Sitemap",
+    "pages": "Pagina's",
+    "blogs": "Blogs",
+    "categories": "Categorieën",
+    "products": "Producten"
+  },
+  "category": {
+    "filters_title": "Filters",
+    "show_filters": "Filters tonen",
+    "hide_filters": "Filters verbergen"
   },
   "error": {
     "404_title": "Pagina niet gevonden (404)",

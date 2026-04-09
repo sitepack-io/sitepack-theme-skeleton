@@ -1,55 +1,18 @@
 {% extends 'layouts/base.twig' %}
 
 {% block content %}
-    <h1>{{ 'cart.title' | trans }}</h1>
+    {% app_block 'cart_before' %}
+    <h1 class="container-element">{{ 'cart.title' | trans }}</h1>
 
-    {% if cart.item_count > 0 %}
-        <form action="/cart" method="post" class="cart-form">
-            <div class="cart-items">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>{{ 'cart.product' | trans }}</th>
-                        <th>{{ 'cart.price' | trans }}</th>
-                        <th>{{ 'cart.quantity' | trans }}</th>
-                        <th>{{ 'cart.total' | trans }}</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for item in cart.items %}
-                        <tr>
-                            <td>
-                                <div class="cart-item-info">
-                                    <img src="{{ item.image | img_url('thumb') }}" alt="{{ item.title }}">
-                                    <a href="{{ item.url }}">{{ item.title }}</a>
-                                </div>
-                            </td>
-                            <td>{{ item.price | money }}</td>
-                            <td>
-                                <input type="number" name="updates[]" value="{{ item.quantity }}" min="0">
-                            </td>
-                            <td>{{ item.line_price | money }}</td>
-                            <td>
-                                <a href="/cart/change?id={{ item.id }}&quantity=0">{{ 'cart.remove' | trans }}</a>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="cart-summary">
-                <p>{{ 'cart.subtotal' | trans({'%price%': cart.total_price | money}) }}</p>
-                <div class="cart-buttons">
-                    <button type="submit" name="update">{{ 'cart.update' | trans }}</button>
-                    <a href="/checkout" class="checkout-button">{{ 'cart.checkout' | trans }}</a>
-                </div>
-            </div>
-        </form>
+    {% if cart.totalProducts > 0 %}
+        <div class="container-element cart">
+                {{ sitepack_cart() }}
+        </div>
     {% else %}
-        <div class="cart-empty">
+        <div class="container-element cart-empty">
             <p>{{ 'cart.empty' | trans }}</p>
             <a href="/">{{ 'cart.continue_shopping' | trans }}</a>
         </div>
     {% endif %}
+    {% app_block 'cart_after' %}
 {% endblock %}

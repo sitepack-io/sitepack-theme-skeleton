@@ -1,3 +1,6 @@
+{% app_block 'footer_before' %}
 <footer>
-    <p>&copy; {{ "now" | date("Y") }} {{ site.name }}</p>
+    {{ sitepack_footer() }}
+    {{ sitepack_copyright() }}
 </footer>
+{% app_block 'footer_after' %}

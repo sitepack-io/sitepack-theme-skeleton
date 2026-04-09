@@ -1,6 +1,7 @@
 {% extends 'layouts/base.twig' %}
 
 {% block content %}
+    {% app_block 'index_before' %}
     <h1>{{ 'general.welcome' | trans({'%site_name%': site.name}) }}</h1>
     <p>{{ 'general.skeleton_message' | trans }}</p>
 
@@ -9,4 +10,5 @@
             {% include 'snippets/product-card.twig' with { product: product } %}
         {% endfor %}
     </div>
+    {% app_block 'index_after' %}
 {% endblock %}

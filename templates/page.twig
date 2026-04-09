@@ -1,8 +1,7 @@
 {% extends 'layouts/base.twig' %}
 
 {% block content %}
-    <h1>{{ page.title }}</h1>
-    <div class="page-content">
-        {{ page.content }}
-    </div>
+    {% app_block 'page_before' %}
+    {{ sitepack_content() }}
+    {% app_block 'page_after' %}
 {% endblock %}

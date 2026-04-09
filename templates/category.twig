@@ -1,18 +1,65 @@
 {% extends 'layouts/base.twig' %}
 
 {% block content %}
-    <h1>{{ category.title }}</h1>
-    {% if category.description %}
-        <div class="category-description">
-            {{ category.description }}
+    {% app_block 'category_before' %}
+
+    <h1 class="container-element">{{ category.name }}</h1>
+
+    {# Elements placed above the listing/content #}
+    {% if category.elementsAbove is defined and category.elementsAbove %}
+        <section class="category-elements-above">
+            {{ sitepack_elements(category.elementsAbove) }}
+        </section>
+    {% endif %}
+
+    {# Quick filters #}
+    {% if quick_filters is defined and quick_filters %}
+        <div class="category-quick-filters">
+            {% for quick in quickFilters %}
+                <a href="{{ quick.url|ensure_link }}" class="btn btn-default">
+                    {{ quick.name }}
+                </a>
+            {% endfor %}
         </div>
     {% endif %}
 
-    <div class="product-grid">
-        {% for product in category.products %}
-            {% include 'snippets/product-card.twig' with { product: product } %}
-        {% else %}
-            <p>{{ 'general.no_products' | trans }}</p>
-        {% endfor %}
+    {# Main content layout #}
+    <div class="category-main-layout">
+        {# Filters block (render as provided) #}
+        {% if category.filters is defined and category.filters %}
+            <aside class="category-sidebar">
+                <div class="category-filters">
+                    <h3 class="category-filters-title">{{ 'category.filters_title'|trans|default('Filters') }}</h3>
+                    <button class="btn btn-primary btn-block btn-lg" id="sidebar-filter-toggle">
+                        <i class="fas fa-filter"></i> {{ 'category.show_filters'|trans|default('Show filters') }}
+                    </button>
+
+                    <div id="sidebar-category-filters">
+                        {{ sitepack_category_filters() }}
+                    </div>
+                </div>
+            </aside>
+        {% endif %}
+
+        <div class="category-products-content">
+            {% if products|length > 0 %}
+                <div class="products-wrapper">
+                    {% for product in products %}
+                        {% include 'snippets/product-card.twig' %}
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>{{ 'general.no_products' | trans }}</p>
+            {% endif %}
+        </div>
     </div>
+
+    {# Elements placed below the listing/content #}
+    {% if category.elementsBelow is defined and category.elementsBelow %}
+        <section class="category-elements-below">
+            {{ sitepack_elements(category.elementsAbove) }}
+        </section>
+    {% endif %}
+
+    {% app_block 'category_after' %}
 {% endblock %}
