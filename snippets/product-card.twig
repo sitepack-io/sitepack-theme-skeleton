@@ -23,5 +23,16 @@
         <div class="product-stock-info" data-product-id="{{ product.uuid }}"></div>
         {% app_block 'product_card_info_after' %}
     </a>
+    
+    {% if not product.disableProductSales %}
+        <form action="/cart/add" method="post" class="product-add-to-cart quick-add">
+            <input type="hidden" name="id" value="{{ product.uuid }}">
+            <input type="hidden" name="quantity" value="1">
+            <button type="submit" class="btn-primary btn-block" disabled>
+                {{ 'product.add_to_cart' | trans }}
+            </button>
+        </form>
+    {% endif %}
+    
     {% app_block 'product_card_after' %}
 </div>

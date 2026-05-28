@@ -13,6 +13,7 @@
   },
   "product": {
     "add_to_cart": "Add to cart",
+    "quantity": "Quantity",
     "out_of_stock": "Out of stock",
     "price_from": "From %price%",
     "sku": "SKU",

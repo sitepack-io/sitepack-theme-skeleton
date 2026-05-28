@@ -96,6 +96,7 @@
                             </div>
                         {% endif %}
 
+                        <input type="hidden" name="quantity" id="quantity" value="1" min="1" class="form-control">
                         <input type="hidden" name="id" value="{{ product.uuid }}">
                         <button type="submit" class="btn-primary" disabled>
                             {{ 'product.add_to_cart' | trans }}

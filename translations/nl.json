@@ -13,6 +13,7 @@
   },
   "product": {
     "add_to_cart": "In winkelwagen",
+    "quantity": "Aantal",
     "out_of_stock": "Niet op voorraad",
     "price_from": "Vanaf %price%",
     "sku": "Artikelnummer",

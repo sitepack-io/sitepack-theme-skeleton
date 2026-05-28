@@ -1,46 +1,4 @@
 /**
- * Helper to make API calls to SitePack endpoints with CSRF tokens
- *
- * @param {string} endpointKey Dot-separated key (e.g. 'store.add_to_cart' or 'contact_form')
- * @param {object} options Fetch options
- * @returns {Promise<Response>}
- */
-async function sitepackApiCall(endpointKey, options = {}) {
-    const sitepack = window.SITEPACK || {};
-    const endpoints = sitepack.endpoints || {};
-    const csrf = sitepack.csrf || {};
-
-    // Get the endpoint URL and CSRF token
-    const keys = endpointKey.split('.');
-    let url = endpoints;
-    let token = csrf;
-
-    for (const key of keys) {
-        url = url ? url[key] : null;
-        token = token ? token[key] : null;
-    }
-
-    if (!url) {
-        throw new Error(`Endpoint for key "${endpointKey}" not found in SITEPACK.endpoints`);
-    }
-
-    // Merge CSRF token into headers
-    const headers = {
-        'Content-Type': 'application/json',
-        ...options.headers
-    };
-
-    if (token) {
-        headers['X-CSRF-TOKEN'] = token;
-    }
-
-    return fetch(url, {
-        ...options,
-        headers
-    });
-}
-
-/**
  * Example Web Component for a simple toggle button
  */
 class ToggleButton extends HTMLElement {
@@ -59,6 +17,11 @@ class ToggleButton extends HTMLElement {
 }
 
 customElements.define('toggle-button', ToggleButton);
+
+// Initialize SitePackSDK
+window.sitepackSdk = new SitePackSDK({type: 'theme', id: 'skeleton'});
+const sdk = window.sitepackSdk;
+
 document.addEventListener('DOMContentLoaded', function() {
     const navToggle = document.getElementById('nav-toggle');
     const navList = document.querySelector('nav ul');
@@ -119,47 +82,46 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Add to cart form handler
-    const addToCartForms = document.querySelectorAll('.product-add-to-cart');
-    addToCartForms.forEach(form => {
-        form.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const submitBtn = this.querySelector('button[type="submit"]');
-            if (submitBtn) {
-                submitBtn.disabled = true;
-                submitBtn.classList.add('disabled');
-            }
-            
-            const formData = new FormData(this);
-            const productId = formData.get('id');
-            const quantity = formData.get('quantity');
+    // Global Add to cart form handler (Delegated for global use)
+    document.addEventListener('submit', async function(e) {
+        const form = e.target.closest('.product-add-to-cart');
+        if (!form) return;
+        
+        e.preventDefault();
+        
+        const submitBtn = form.querySelector('button[type="submit"]');
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.classList.add('disabled');
+        }
+        
+        const formData = new FormData(form);
+        const productId = formData.get('id') || formData.get('product_id') || formData.get('product');
+        const quantity = formData.get('quantity') || 1;
 
-            try {
-                const response = await sitepackApiCall('store.add_to_cart', {
-                    method: "POST",
-                    body: JSON.stringify({
-                        product: productId,
-                        quantity: parseInt(quantity),
-                    })
-                });
-                const data = await response.json();
-                console.log(data);
-                
-                // Open the cart sidebar
-                const cartTrigger = document.getElementById('sitepack-cart-trigger');
-                if (cartTrigger) {
-                    cartTrigger.click();
-                }
-            } catch (error) {
-                console.error('Error adding to cart:', error);
-            } finally {
-                if (submitBtn) {
-                    submitBtn.disabled = false;
-                    submitBtn.classList.remove('disabled');
-                }
+        try {
+            const data = await sdk.ecommerce.addToCart(productId, parseInt(quantity));
+            console.log('Added to cart:', data);
+            
+            // Dispatch a global event that other components can listen to
+            window.dispatchEvent(new CustomEvent('sitepack:cart:added', {
+                detail: { product: productId, quantity: quantity, response: data }
+            }));
+            
+            // Open the cart sidebar (standard behavior)
+            const cartTrigger = document.getElementById('sitepack-cart-trigger');
+            if (cartTrigger) {
+                cartTrigger.click();
             }
-        });
+        } catch (error) {
+            console.error('Error adding to cart:', error);
+            alert('Could not add product to cart. Please try again.');
+        } finally {
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('disabled');
+            }
+        }
     });
 
     // Sidebar filter toggle (Mobile)
@@ -204,61 +166,53 @@ document.addEventListener('DOMContentLoaded', function() {
         const productId = el.getAttribute('data-product-id');
         if (productId) {
             try {
-                const response = await sitepackApiCall('store.stock_info', {
-                    method: 'POST',
-                    body: JSON.stringify({
-                        product_id: productId
-                    })
-                });
-                if (response.ok) {
-                    const res = await response.json();
-                    if (res.status === 'success' && res.data) {
-                        const data = res.data;
-                        if (data.inStock > 0 || data.quantityAvailable > 0 || data.inStock === true) {
-                            // el.textContent = `In stock: ${data.quantityAvailable || data.inStock}`;
-                            el.textContent = `In stock`;
-                            el.classList.add('in-stock');
+                const res = await sdk.ecommerce.getStockInfo(productId);
+                if (res.status === 'success' && res.data) {
+                    const data = res.data;
+                    if (data.inStock > 0 || data.quantityAvailable > 0 || data.inStock === true) {
+                        // el.textContent = `In stock: ${data.quantityAvailable || data.inStock}`;
+                        el.textContent = `In stock`;
+                        el.classList.add('in-stock');
 
-                            // Enable the add to cart button
-                            const form = el.closest('.product-detail')?.querySelector('.product-add-to-cart') || el.closest('.product-card')?.querySelector('.product-add-to-cart');
-                            if (form) {
-                                const addToCartBtn = form.querySelector('button[type="submit"]');
-                                if (addToCartBtn) {
-                                    addToCartBtn.disabled = false;
-                                    addToCartBtn.classList.remove('disabled');
-                                }
-                            }
-                        } else if (data.allowBackorder) {
-                            el.textContent = data.deliveryDate ? `Available on backorder (Delivery: ${data.deliveryDate})` : 'Available on backorder';
-                            el.classList.add('backorder');
-
-                            // Enable the add to cart button for backorder
-                            const form = el.closest('.product-detail')?.querySelector('.product-add-to-cart') || el.closest('.product-card')?.querySelector('.product-add-to-cart');
-                            if (form) {
-                                const addToCartBtn = form.querySelector('button[type="submit"]');
-                                if (addToCartBtn) {
-                                    addToCartBtn.disabled = false;
-                                    addToCartBtn.classList.remove('disabled');
-                                }
-                            }
-                        } else {
-                            el.textContent = 'Out of stock';
-                            el.classList.add('out-of-stock');
-                            // Ensure the add to cart button is disabled
-                            const form = el.closest('.product-detail')?.querySelector('.product-add-to-cart') || el.closest('.product-card')?.querySelector('.product-add-to-cart');
-                            if (form) {
-                                const addToCartBtn = form.querySelector('button[type="submit"]');
-                                if (addToCartBtn) {
-                                    addToCartBtn.disabled = true;
-                                    addToCartBtn.classList.add('disabled');
-                                }
+                        // Enable the add to cart button
+                        const form = el.closest('.product-detail')?.querySelector('.product-add-to-cart') || el.closest('.product-card')?.querySelector('.product-add-to-cart');
+                        if (form) {
+                            const addToCartBtn = form.querySelector('button[type="submit"]');
+                            if (addToCartBtn) {
+                                addToCartBtn.disabled = false;
+                                addToCartBtn.classList.remove('disabled');
                             }
                         }
-                    } else if (res && res.stock_message) {
-                        el.textContent = res.stock_message;
-                    } else if (res && typeof res.stock !== 'undefined') {
-                        el.textContent = `Stock: ${res.stock}`;
+                    } else if (data.allowBackorder) {
+                        el.textContent = data.deliveryDate ? `Available on backorder (Delivery: ${data.deliveryDate})` : 'Available on backorder';
+                        el.classList.add('backorder');
+
+                        // Enable the add to cart button for backorder
+                        const form = el.closest('.product-detail')?.querySelector('.product-add-to-cart') || el.closest('.product-card')?.querySelector('.product-add-to-cart');
+                        if (form) {
+                            const addToCartBtn = form.querySelector('button[type="submit"]');
+                            if (addToCartBtn) {
+                                addToCartBtn.disabled = false;
+                                addToCartBtn.classList.remove('disabled');
+                            }
+                        }
+                    } else {
+                        el.textContent = 'Out of stock';
+                        el.classList.add('out-of-stock');
+                        // Ensure the add to cart button is disabled
+                        const form = el.closest('.product-detail')?.querySelector('.product-add-to-cart') || el.closest('.product-card')?.querySelector('.product-add-to-cart');
+                        if (form) {
+                            const addToCartBtn = form.querySelector('button[type="submit"]');
+                            if (addToCartBtn) {
+                                addToCartBtn.disabled = true;
+                                addToCartBtn.classList.add('disabled');
+                            }
+                        }
                     }
+                } else if (res && res.stock_message) {
+                    el.textContent = res.stock_message;
+                } else if (res && typeof res.stock !== 'undefined') {
+                    el.textContent = `Stock: ${res.stock}`;
                 }
             } catch (error) {
                 console.error('Error fetching stock info:', error);
