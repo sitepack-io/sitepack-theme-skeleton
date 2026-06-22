@@ -3,36 +3,48 @@
     <a href="{{ product.url }}">
         {% app_block 'product_card_image_before' %}
         <div class="product-image">
-            <img src="{{ product.first_image.thumbnail }}" alt="{{ product.first_image.alt_text }}"/>
-        </div>
-        {% app_block 'product_card_info_before' %}
-        <div class="product-title">
-            <h3>{{ product.name }}</h3>
-        </div>
-        <div class="product-price">
-            {% if product.pricePromoCents > 0 and product.priceCents > product.pricePromoCents %}
-                <span class="old-price">{{ sitepack_price(product.priceCents) }}</span>
-                <span class="new-price">{{ sitepack_price(product.pricePromoCents) }}</span>
-            {% elseif product.priceAdvisedCents > 0 and product.priceAdvisedCents > product.priceCents %}
-                <span class="old-price">{{ sitepack_price(product.priceAdvisedCents) }}</span>
-                <span class="new-price">{{ sitepack_price(product.priceCents) }}</span>
+            {% if product.first_image.thumbnail != null %}
+                <img src="{{ product.first_image.thumbnail }}" alt="{{ product.first_image.alt_text }}"/>
             {% else %}
-                <span class="new-price">{{ sitepack_price(product.priceCents) }}</span>
+                <img src="/images/image-250x250.png" alt="{{ product.name }}"/>
             {% endif %}
         </div>
-        <div class="product-stock-info" data-product-id="{{ product.uuid }}"></div>
+        {% app_block 'product_card_info_before' %}
+
+        <div class="product-information">
+            <div class="product-title">
+                <span class="product-brand">{{ product.brand }}</span>
+                <h3>{{ product.name }}</h3>
+            </div>
+            <div class="product-rating">
+                {% if product.reviewCount > 0 %}
+                    {% for i in 1..5 %}
+                        {% if product.ratingScore >= i %}
+                            {{ sitepack_icon('star-solid') }}
+                        {% elseif product.ratingScore >= i - 0.5 %}
+                            {{ sitepack_icon('star-half') }}
+                        {% else %}
+                            {{ sitepack_icon('star') }}
+                        {% endif %}
+                    {% endfor %}
+
+                    <span class="review-count">({{ product.reviewCount }})</span>
+                {% endif %}
+            </div>
+            <div class="product-price">
+                {% if product.pricePromoCents > 0 and product.priceCents > product.pricePromoCents %}
+                    <span class="new-price">{{ sitepack_price(product.pricePromoCents) }}</span>
+                    <span class="old-price">{{ sitepack_price(product.priceCents) }}</span>
+                {% elseif product.priceAdvisedCents > 0 and product.priceAdvisedCents > product.priceCents %}
+                    <span class="new-price">{{ sitepack_price(product.priceCents) }}</span>
+                    <span class="old-price">{{ sitepack_price(product.priceAdvisedCents) }}</span>
+                {% else %}
+                    <span class="new-price">{{ sitepack_price(product.priceCents) }}</span>
+                {% endif %}
+            </div>
+            <div class="product-stock-info" data-product-id="{{ product.uuid }}"></div>
+        </div>
         {% app_block 'product_card_info_after' %}
     </a>
-    
-    {% if not product.disableProductSales %}
-        <form action="/cart/add" method="post" class="product-add-to-cart quick-add">
-            <input type="hidden" name="id" value="{{ product.uuid }}">
-            <input type="hidden" name="quantity" value="1">
-            <button type="submit" class="btn-primary btn-block" disabled>
-                {{ 'product.add_to_cart' | trans }}
-            </button>
-        </form>
-    {% endif %}
-    
     {% app_block 'product_card_after' %}
 </div>

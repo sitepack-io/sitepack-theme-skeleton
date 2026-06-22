@@ -12,6 +12,17 @@
         </section>
     {% endif %}
 
+    {# Sub categories #}
+    {% if sub_categories.length >= 1 %}
+        <div class="category-sub-categories">
+            {% for sub_category in sub_categories %}
+                <a href="{{ sub_category.slug }}">
+                    {{ sub_category.name }}
+                </a>
+            {% endfor %}
+        </div>
+    {% endif %}
+
     {# Quick filters #}
     {% if quick_filters is defined and quick_filters %}
         <div class="category-quick-filters">
