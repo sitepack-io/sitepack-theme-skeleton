@@ -4,8 +4,9 @@ This is a new theme skeleton for SitePack. This package is open-source and re-us
 
 ## Resources
 
-- **Official Website**: [sitepack.dev](https://sitepack.dev)
 - **Theme Development Documentation**: [Theme Overview](https://sitepack.dev/docs/themes/overview)
+- **SitePack developer documentation**: [sitepack.dev](https://sitepack.dev)
+- **SitePack website builder**: [sitepack.eu](https://sitepack.eu)
 
 ## Features
 
@@ -29,9 +30,32 @@ The typical development workflow for a SitePack theme requires the **SitePack CL
 - `config/`: Contains theme configuration and settings schema.
 - `layouts/`: Base layout templates.
 - `snippets/`: Reusable code snippets (e.g., header, footer).
-- `templates/`: Main page templates (e.g., home, product, category, blog, account, cart).
+- `templates/`: Main and custom page templates (e.g., home, product, category, blog, account, cart).
 - `theme.json`: Theme metadata and supported features.
 - `.sitepackignore`: Files and folders to ignore when syncing with SitePack servers.
+
+## Custom Templates
+
+SitePack themes can define custom templates in `theme.json`. These templates can be used for specific pages and can have custom fields that are manageable in the SitePack admin.
+
+### Landing Page (`landing-page`)
+
+The `landing-page` template is an example of a custom template. It includes the following fields:
+
+- **hero-title** (`text`): The main hero title.
+- **hero-sub-head** (`text`): The main hero sub heading.
+- **hero-sub-paragraph** (`textarea`): The main hero sub paragraph.
+- **hero-image** (`image`): The main hero image.
+- **hero-cta-label** (`text`): The main hero CTA label.
+- **hero-cta-url** (`text`): The main hero CTA URL.
+- **features-title** (`text`): Features title.
+- **feature-1-title** (`text`): Feature 1 title.
+- **feature-1-text** (`textarea`): Feature 1 text.
+- **feature-2-title** (`text`): Feature 2 title.
+- **feature-2-text** (`textarea`): Feature 2 text.
+- **feature-3-title** (`text`): Feature 3 title.
+- **feature-3-text** (`textarea`): Feature 3 text.
+- **usps** (`list`): A list of Unique Selling Points.
 
 ## Contributing
 

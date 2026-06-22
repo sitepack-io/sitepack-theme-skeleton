@@ -3,10 +3,84 @@
   "name": "Base Skeleton",
   "author": "SitePack Team",
   "version": "1",
-  "supported_features": [
-    "webshop",
-    "blog",
-    "wishlist"
-  ],
-  "preview_image": "assets/img/preview.png"
+  "supports_site": true,
+  "supports_online_store": true,
+  "templates": [
+    {
+      "key": "landing-page",
+      "name": "Landing page",
+      "fields": [
+        {
+          "key": "hero-title",
+          "type": "text",
+          "label": "The main hero title"
+        },
+        {
+          "key": "hero-sub-head",
+          "type": "text",
+          "label": "The main hero sub heading"
+        },
+        {
+          "key": "hero-sub-paragraph",
+          "type": "textarea",
+          "label": "The main hero sub paragraph"
+        },
+        {
+          "key": "hero-image",
+          "type": "image",
+          "label": "The main hero image"
+        },
+        {
+          "key": "hero-cta-label",
+          "type": "text",
+          "label": "The main hero CTA label"
+        },
+        {
+          "key": "hero-cta-url",
+          "type": "text",
+          "label": "The main hero CTA URL"
+        },
+        {
+          "key": "features-title",
+          "type": "text",
+          "label": "Features title"
+        },
+        {
+          "key": "feature-1-title",
+          "type": "text",
+          "label": "Feature 1 title"
+        },
+        {
+          "key": "feature-1-text",
+          "type": "textarea",
+          "label": "Feature 1 text"
+        },
+        {
+          "key": "feature-2-title",
+          "type": "text",
+          "label": "Feature 2 title"
+        },
+        {
+          "key": "feature-2-text",
+          "type": "textarea",
+          "label": "Feature 2 text"
+        },
+        {
+          "key": "feature-3-title",
+          "type": "text",
+          "label": "Feature 3 title"
+        },
+        {
+          "key": "feature-3-text",
+          "type": "textarea",
+          "label": "Feature 3 text"
+        },
+        {
+          "key": "usps",
+          "type": "list",
+          "label": "USPs"
+        }
+      ]
+    }
+  ]
 }
