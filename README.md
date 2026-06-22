@@ -4,15 +4,16 @@ This is a new theme skeleton for SitePack. This package is open-source and re-us
 
 ## Requirements
 
-To register and run an app, you need a **SitePack Partner Account**.
+To register and run an theme, you need a **SitePack Partner Account**.
 - **Register for free**: [https://sitepack.eu/partners](https://sitepack.eu/partners)
 
 ## Resources
 
-- **Theme Development Documentation**: [Theme Overview](https://sitepack.dev/docs/themes/overview)
-- **SitePack Developer documentation**: [sitepack.dev](https://sitepack.dev)
-- **Partner Portal**: [SitePack Partners](https://sitepack.eu/partners)
-- **SitePack Website Builder**: [sitepack.eu](https://sitepack.eu)
+- **[Theme Development Documentation](https://sitepack.dev/docs/themes/overview)** 
+- **[SitePack Developer documentation](https://sitepack.dev)** 
+- **[Partner Portal](https://sitepack.eu/partners)** 
+- **[SitePack Website Builder](https://sitepack.eu)**
+- **[SitePack documentation](https://help.sitepack.eu)**
 
 ## Features
 
@@ -57,10 +58,6 @@ The `landing-page` template is an example of a custom template. It includes the 
 - **features-title** (`text`): Features title.
 - **feature-1-title** (`text`): Feature 1 title.
 - **feature-1-text** (`textarea`): Feature 1 text.
-- **feature-2-title** (`text`): Feature 2 title.
-- **feature-2-text** (`textarea`): Feature 2 text.
-- **feature-3-title** (`text`): Feature 3 title.
-- **feature-3-text** (`textarea`): Feature 3 text.
 - **usps** (`list`): A list of Unique Selling Points.
 
 ## Contributing
