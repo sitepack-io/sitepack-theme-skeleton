@@ -2,11 +2,17 @@
 
 This is a new theme skeleton for SitePack. This package is open-source and re-usable for our customers to build their own custom themes.
 
+## Requirements
+
+To register and run an app, you need a **SitePack Partner Account**.
+- **Register for free**: [https://sitepack.eu/partners](https://sitepack.eu/partners)
+
 ## Resources
 
 - **Theme Development Documentation**: [Theme Overview](https://sitepack.dev/docs/themes/overview)
-- **SitePack developer documentation**: [sitepack.dev](https://sitepack.dev)
-- **SitePack website builder**: [sitepack.eu](https://sitepack.eu)
+- **SitePack Developer documentation**: [sitepack.dev](https://sitepack.dev)
+- **Partner Portal**: [SitePack Partners](https://sitepack.eu/partners)
+- **SitePack Website Builder**: [sitepack.eu](https://sitepack.eu)
 
 ## Features
 
