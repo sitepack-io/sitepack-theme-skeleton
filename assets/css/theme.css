@@ -1,3 +1,5 @@
+/* SitePack theme skeleton */
+
 * {
     box-sizing: border-box;
 }
@@ -588,8 +590,12 @@ footer h1, footer h2, footer h3, footer h4, footer h5, footer h6 {
 }
 
 @keyframes placeholder-shimmer {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
 }
 
 .category-card__info {
@@ -1339,17 +1345,37 @@ nav ul {
     color: var(--main-color);
 }
 
-.filter-icon { margin-left: .5rem; display: inline-flex; align-items: center; }
+.filter-icon {
+    margin-left: .5rem;
+    display: inline-flex;
+    align-items: center;
+}
 
 /* Show correct icon depending on collapse state (Bootstrap-like) */
-.filter-link .if-opened { display: none; }
-.filter-link .if-closed { display: inline-flex; }
-.filter-link:not(.collapsed) .if-opened { display: inline-flex; }
-.filter-link:not(.collapsed) .if-closed { display: none; }
+.filter-link .if-opened {
+    display: none;
+}
+
+.filter-link .if-closed {
+    display: inline-flex;
+}
+
+.filter-link:not(.collapsed) .if-opened {
+    display: inline-flex;
+}
+
+.filter-link:not(.collapsed) .if-closed {
+    display: none;
+}
 
 /* Collapse support (no JS library required for simple default state) */
-.collapse { display: none; }
-.collapse.in, .collapse.show { display: block; }
+.collapse {
+    display: none;
+}
+
+.collapse.in, .collapse.show {
+    display: block;
+}
 
 /* Filter options list */
 .category-filter-options {
@@ -1358,7 +1384,9 @@ nav ul {
     margin: 0;
 }
 
-.category-filter-options li { margin: 0.25rem 0; }
+.category-filter-options li {
+    margin: 0.25rem 0;
+}
 
 .category-filter-link {
     display: inline-flex;
@@ -1378,11 +1406,27 @@ nav ul {
 }
 
 /* Nesting levels */
-.category-filter-options .nested-level-0 { padding-left: 0; }
-.category-filter-options .nested-level-1 { padding-left: 0.75rem; }
-.category-filter-options .nested-level-2 { padding-left: 1.5rem; }
-.category-filter-options .nested-level-3 { padding-left: 2.25rem; }
+.category-filter-options .nested-level-0 {
+    padding-left: 0;
+}
+
+.category-filter-options .nested-level-1 {
+    padding-left: 0.75rem;
+}
+
+.category-filter-options .nested-level-2 {
+    padding-left: 1.5rem;
+}
+
+.category-filter-options .nested-level-3 {
+    padding-left: 2.25rem;
+}
 
 /* Optional: compact icon in links */
-.category-filter-link i { color: #999; }
-.category-filter-link:hover i { color: var(--main-color); }
+.category-filter-link i {
+    color: #999;
+}
+
+.category-filter-link:hover i {
+    color: var(--main-color);
+}
