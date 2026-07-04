@@ -41,9 +41,62 @@ The typical development workflow for a SitePack theme requires the **SitePack CL
 - `theme.json`: Theme metadata and supported features.
 - `.sitepackignore`: Files and folders to ignore when syncing with SitePack servers.
 
+## Theme Configuration (`theme.json`)
+
+The `theme.json` file is the heart of your theme. It defines the theme metadata, supported features, custom settings, and templates.
+
+### Metadata
+
+- `uuid`: A unique identifier for the theme.
+- `name`: The display name of the theme.
+- `author`: The developer or team who created the theme.
+- `version`: The current version of the theme.
+- `supports_site`: Set to `true` if the theme supports standard websites.
+- `supports_online_store`: Set to `true` if the theme supports e-commerce features.
+
+### Theme Settings
+
+Developers can define custom settings that users can adjust in the SitePack admin. These settings are defined in the `settings` array.
+
+#### Required Settings
+
+The following settings are **mandatory** for every theme to ensure basic styling consistency:
+
+- **main-color** (`colour`): The primary brand color.
+- **main-color-text** (`colour`): The text color used on top of the main color.
+- **link-color** (`colour`): The default color for hyperlinks.
+- **link-active-color** (`colour`): The color for links when hovered or active.
+
+#### Available Settings in Skeleton
+
+These settings are already defined in the skeleton and can be customized or expanded:
+
+| Key | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `secondary-color` | `colour` | `#129171` | Secondary brand color. |
+| `secondary-color-text` | `colour` | `#ffffff` | Text color on secondary color. |
+| `link-text-decoration` | `options` | `underline` | `none`, `underline`, `overline`, `line-through` |
+| `text-color` | `colour` | `#333333` | General body text color. |
+| `background-color` | `colour` | `#ffffff` | General page background color. |
+| `content-background-color` | `colour` | `#ffffff` | Background color for content areas. |
+| `blog-background-color` | `colour` | `#ffffff` | Background color for blog pages. |
+| `category-background-color` | `colour` | `#ffffff` | Background color for category pages. |
+| `header-background-color` | `colour` | `darkblue` | Background color for the header. |
+| `header-text-color` | `colour` | `#ffffff` | Text color in the header. |
+| `header-topbar-color` | `colour` | `#2b2b2b` | Background color for the top bar. |
+| `header-topbar-text-color` | `colour` | `#ffffff` | Text color in the top bar. |
+| `footer-background-color` | `colour` | `#3f434a` | Background color for the footer. |
+| `footer-text-color` | `colour` | `#f1f1f1` | Text color in the footer. |
+| `footer-title-color` | `colour` | `#f1f1f1` | Title color in the footer. |
+| `copyright-background-color` | `colour` | `#ffffff` | Background for the copyright area. |
+| `copyright-text-color` | `colour` | `#000000` | Text color for the copyright area. |
+| `label-background-color` | `colour` | `#cfcfcf` | Background color for labels/badges. |
+| `border-radius` | `pixels` | `5px` | Default border radius for elements. |
+| `container-width` | `pixels` | `1200px` | Maximum width of the site container. |
+
 ## Custom Templates
 
-SitePack themes can define custom templates in `theme.json`. These templates can be used for specific pages and can have custom fields that are manageable in the SitePack admin.
+SitePack themes can define custom templates in `theme.json`. These templates allow you to create unique layouts for specific pages with manageable fields in the SitePack admin.
 
 ### Landing Page (`landing-page`)
 
@@ -58,6 +111,10 @@ The `landing-page` template is an example of a custom template. It includes the 
 - **features-title** (`text`): Features title.
 - **feature-1-title** (`text`): Feature 1 title.
 - **feature-1-text** (`textarea`): Feature 1 text.
+- **feature-2-title** (`text`): Feature 2 title.
+- **feature-2-text** (`textarea`): Feature 2 text.
+- **feature-3-title** (`text`): Feature 3 title.
+- **feature-3-text** (`textarea`): Feature 3 text.
 - **usps** (`list`): A list of Unique Selling Points.
 
 ## Contributing

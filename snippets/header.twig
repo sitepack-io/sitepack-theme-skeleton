@@ -3,24 +3,27 @@
     <nav>
         <ul>
             <li class="brand">
-                <a href="/">
-                    <img src="{{ 'img/icon.png'|asset_url }}" alt="SitePack" />
-                    <span class="site-name">
-                        {{ site.name }}
-                    </span>
+                <a href="/" title="{{ site.name }}">
+                    {% if site.logo %}
+                        <img src="{{ site.logo }}" alt="{{ site.name }}"/>
+                    {% else %}
+                        <span class="site-name">
+                            {{ site.name }}
+                        </span>
+                    {% endif %}
                 </a>
             </li>
 
             {{ sitepack_navigation() }}
-            
+
             <li class="nav-icon nav-search-icon" id="nav-search">
                 {{ sitepack_live_search_icon() }}
             </li>
-{#            {% if settings.store_enabled %}#}
-            <li class="nav-icon nav-shopping-cart" id="nav-cart">
-                {{ sitepack_shopping_cart_icon() }}
-            </li>
-{#            {% endif %}#}
+            {% if settings.getSetting('store_enabled') %}
+                <li class="nav-icon nav-shopping-cart" id="nav-cart">
+                    {{ sitepack_shopping_cart_icon() }}
+                </li>
+            {% endif %}
 
             <li class="nav-toggle" id="nav-toggle">
                 <span></span>
@@ -29,9 +32,9 @@
             </li>
         </ul>
     </nav>
-{#You can use a search bar:#}
-{#    <div class="search-bar">#}
-{#        {{ sitepack_live_search() }}#}
-{#    </div>#}
+    {# You can use a search bar: #}
+{#        <div class="search-bar">#}
+{#            {{ sitepack_live_search() }}#}
+{#        </div>#}
 </header>
 {% app_block 'header_after' %}

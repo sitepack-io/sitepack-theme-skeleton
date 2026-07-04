@@ -1,10 +1,138 @@
 {
-  "uuid": "019d1125-819a-7275-87f0-3549603ed88d",
+  "uuid": "sitepack-theme-skeleton",
   "name": "Base Skeleton",
   "author": "SitePack Team",
   "version": "1",
   "supports_site": true,
   "supports_online_store": true,
+  "settings": [
+    {
+      "type": "colour",
+      "key": "main-color",
+      "default": "#ca992f"
+    },
+    {
+      "type": "colour",
+      "key": "main-color-text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "colour",
+      "key": "secondary-color",
+      "default": "#129171"
+    },
+    {
+      "type": "colour",
+      "key": "secondary-color-text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "colour",
+      "key": "link-color",
+      "default": "#ca992f"
+    },
+    {
+      "type": "colour",
+      "key": "link-active-color",
+      "default": "#b38a2a"
+    },
+    {
+      "type": "options",
+      "key": "link-text-decoration",
+      "default": "underline",
+      "options": [
+        "none",
+        "underline",
+        "overline",
+        "line-through"
+      ]
+    },
+    {
+      "type": "colour",
+      "key": "text-color",
+      "default": "#333333"
+    },
+    {
+      "type": "colour",
+      "key": "background-color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "colour",
+      "key": "content-background-color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "colour",
+      "key": "blog-background-color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "colour",
+      "key": "category-background-color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "colour",
+      "key": "header-background-color",
+      "default": "darkblue"
+    },
+    {
+      "type": "colour",
+      "key": "header-text-color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "colour",
+      "key": "header-topbar-color",
+      "default": "#2b2b2b"
+    },
+    {
+      "type": "colour",
+      "key": "header-topbar-text-color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "colour",
+      "key": "footer-text-color",
+      "default": "#f1f1f1"
+    },
+    {
+      "type": "colour",
+      "key": "footer-background-color",
+      "default": "#3f434a"
+    },
+    {
+      "type": "colour",
+      "key": "footer-title-color",
+      "default": "#f1f1f1"
+    },
+    {
+      "type": "colour",
+      "key": "copyright-background-color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "colour",
+      "key": "copyright-text-color",
+      "default": "#000000"
+    },
+    {
+      "type": "colour",
+      "key": "label-background-color",
+      "default": "#cfcfcf"
+    },
+    {
+      "type": "pixels",
+      "key": "border-radius",
+      "default": "5px"
+    },
+    {
+      "type": "pixels",
+      "key": "container-width",
+      "default": "1200px"
+    }
+  ],
   "templates": [
     {
       "key": "landing-page",
