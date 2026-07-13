@@ -8,47 +8,6 @@
   "settings": [
     {
       "type": "colour",
-      "key": "main-color",
-      "default": "#ca992f"
-    },
-    {
-      "type": "colour",
-      "key": "main-color-text",
-      "default": "#ffffff"
-    },
-    {
-      "type": "colour",
-      "key": "secondary-color",
-      "default": "#129171"
-    },
-    {
-      "type": "colour",
-      "key": "secondary-color-text",
-      "default": "#ffffff"
-    },
-    {
-      "type": "colour",
-      "key": "link-color",
-      "default": "#ca992f"
-    },
-    {
-      "type": "colour",
-      "key": "link-active-color",
-      "default": "#b38a2a"
-    },
-    {
-      "type": "options",
-      "key": "link-text-decoration",
-      "default": "underline",
-      "options": [
-        "none",
-        "underline",
-        "overline",
-        "line-through"
-      ]
-    },
-    {
-      "type": "colour",
       "key": "text-color",
       "default": "#333333"
     },
@@ -121,16 +80,6 @@
       "type": "colour",
       "key": "label-background-color",
       "default": "#cfcfcf"
-    },
-    {
-      "type": "pixels",
-      "key": "border-radius",
-      "default": "5px"
-    },
-    {
-      "type": "pixels",
-      "key": "container-width",
-      "default": "1200px"
     }
   ],
   "templates": [

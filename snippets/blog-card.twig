@@ -1,11 +1,11 @@
 <article class="blog-post-summary">
     <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>
-    <p class="article-meta">{{ 'general.published_on' | trans({'%date%': article.published_at | date('M d, Y')}) }}</p>
+    <p class="article-meta">{{ 'general.published_on' | trans({'%date%': article.created | date('M d, Y')}) }}</p>
     {% if article.image %}
-        <img src="{{ article.image | img_url('medium') }}" alt="{{ article.title }}">
+        <img src="{{ article.image }}" alt="{{ article.title }}">
     {% endif %}
     <div class="article-excerpt">
-        {{ article.excerpt | default(article.content | truncate(200)) }}
+        {{ article.previewText }}
     </div>
     <a href="{{ article.url }}">{{ 'general.read_more' | trans }}</a>
 </article>

@@ -2,16 +2,18 @@
 
 {% block content %}
     {% app_block 'blog_before' %}
-    <h1>{{ blog.title }}</h1>
-    
-    <div class="blog-posts">
-        {% for article in blog.articles %}
-            {% app_block 'blog_article_before' %}
-            {% include 'snippets/blog-card.twig' with { article: article } %}
-            {% app_block 'blog_article_after' %}
-        {% else %}
-            <p>{{ 'general.no_posts' | trans }}</p>
-        {% endfor %}
+    <div class="container-element">
+        <h1>{{ blog.title }}</h1>
+
+        <div class="blog-posts">
+            {% for article in blog.articles %}
+                {% app_block 'blog_article_before' %}
+                {% include 'snippets/blog-card.twig' with { article: article } %}
+                {% app_block 'blog_article_after' %}
+            {% else %}
+                <p>{{ 'general.no_posts' | trans }}</p>
+            {% endfor %}
+        </div>
     </div>
     {% app_block 'blog_after' %}
 {% endblock %}

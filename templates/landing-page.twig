@@ -1,0 +1,70 @@
+{% extends 'layouts/base.twig' %}
+
+{# Fields come from the "landing-page" custom template defined in theme.json
+   and are exposed on the page object using their field key. #}
+{% block content %}
+    {% app_block 'landing_before' %}
+
+    <section class="landing-hero">
+        <div class="container-element landing-hero__inner">
+            <div class="landing-hero__content">
+                {% if page['hero-sub-head'] %}
+                    <p class="landing-hero__sub-head">{{ page['hero-sub-head'] }}</p>
+                {% endif %}
+
+                {% if page['hero-title'] %}
+                    <h1 class="landing-hero__title">{{ page['hero-title'] }}</h1>
+                {% endif %}
+
+                {% if page['hero-sub-paragraph'] %}
+                    <p class="landing-hero__text">{{ page['hero-sub-paragraph'] }}</p>
+                {% endif %}
+
+                {% if page['usps'] %}
+                    <ul class="landing-usps">
+                        {% for usp in page['usps'] %}
+                            <li>{{ usp.label|default(usp) }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+                {% if page['hero-cta-label'] and page['hero-cta-url'] %}
+                    <a href="{{ page['hero-cta-url']|ensure_link }}" class="btn-primary btn-lg">
+                        {{ page['hero-cta-label'] }}
+                    </a>
+                {% endif %}
+            </div>
+
+            {% if page['hero-image'] %}
+                <div class="landing-hero__image">
+                    <img src="{{ page['hero-image'] }}" alt="{{ page['hero-title']|default(site.name) }}">
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+    {% if page['feature-1-title'] or page['feature-2-title'] or page['feature-3-title'] %}
+        <section class="landing-features">
+            <div class="container-element">
+                {% if page['features-title'] %}
+                    <h2 class="landing-features__title">{{ page['features-title'] }}</h2>
+                {% endif %}
+
+                <div class="landing-features__grid">
+                    {% for i in 1..3 %}
+                        {% if page['feature-' ~ i ~ '-title'] %}
+                            <div class="feature-card">
+                                <h3 class="feature-card__title">{{ page['feature-' ~ i ~ '-title'] }}</h3>
+                                {% if page['feature-' ~ i ~ '-text'] %}
+                                    <p class="feature-card__text">{{ page['feature-' ~ i ~ '-text'] }}</p>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+    {% app_block 'landing_after' %}
+{% endblock %}

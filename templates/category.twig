@@ -14,19 +14,24 @@
 
     {# Sub categories #}
     {% if sub_categories.length >= 1 %}
-        <div class="category-sub-categories">
-            {% for sub_category in sub_categories %}
-                <a href="{{ sub_category.slug }}">
-                    {{ sub_category.name }}
-                </a>
-            {% endfor %}
+        <div class="container-element category-sub-categories">
+            <div class="category-sub-categories-grid">
+                {% for sub_category in sub_categories %}
+                    {% include 'snippets/category-card.twig' with { category: {
+                        url: sub_category.slug,
+                        categoryName: sub_category.name,
+                        label: sub_category.label|default(''),
+                        backgroundImage: sub_category.backgroundImage|default(sub_category.image|default(null))
+                    } } %}
+                {% endfor %}
+            </div>
         </div>
     {% endif %}
 
     {# Quick filters #}
     {% if quick_filters is defined and quick_filters %}
         <div class="category-quick-filters">
-            {% for quick in quickFilters %}
+            {% for quick in quick_filters %}
                 <a href="{{ quick.url|ensure_link }}" class="btn btn-default">
                     {{ quick.name }}
                 </a>
@@ -68,7 +73,7 @@
     {# Elements placed below the listing/content #}
     {% if category.elementsBelow is defined and category.elementsBelow %}
         <section class="category-elements-below">
-            {{ sitepack_elements(category.elementsAbove) }}
+            {{ sitepack_elements(category.elementsBelow) }}
         </section>
     {% endif %}
 

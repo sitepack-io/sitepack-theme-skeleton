@@ -60,12 +60,19 @@ Developers can define custom settings that users can adjust in the SitePack admi
 
 #### Required Settings
 
-The following settings are **mandatory** for every theme to ensure basic styling consistency:
+The following settings are **mandatory** and are always added from SitePack core to ensure proper website designs:
 
-- **main-color** (`colour`): The primary brand color.
-- **main-color-text** (`colour`): The text color used on top of the main color.
-- **link-color** (`colour`): The default color for hyperlinks.
-- **link-active-color** (`colour`): The color for links when hovered or active.
+- **heading-font** (`font`): The font used for headings (default: `Open_Sans`).
+- **body-font** (`font`): The font used for body text (default: `Open_Sans`).
+- **main-color** (`colour`): The primary brand color (default: `#ca992f`).
+- **main-color-text** (`colour`): The text color used on top of the main color (default: `#ffffff`).
+- **secondary-color** (`colour`): Secondary brand color (default: `#129171`).
+- **secondary-color-text** (`colour`): Text color on secondary color (default: `#ffffff`).
+- **link-color** (`colour`): The default color for hyperlinks (default: `#ca992f`).
+- **link-active-color** (`colour`): The color for links when hovered or active (default: `#b38a2a`).
+- **link-text-decoration** (`options`): The text decoration for links (default: `underline`).
+- **border-radius** (`pixels`): Default border radius for elements (default: `5px`).
+- **container-width** (`pixels`): Maximum width of the site container (default: `1200px`).
 
 #### Available Settings in Skeleton
 
@@ -73,9 +80,6 @@ These settings are already defined in the skeleton and can be customized or expa
 
 | Key | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
-| `secondary-color` | `colour` | `#129171` | Secondary brand color. |
-| `secondary-color-text` | `colour` | `#ffffff` | Text color on secondary color. |
-| `link-text-decoration` | `options` | `underline` | `none`, `underline`, `overline`, `line-through` |
 | `text-color` | `colour` | `#333333` | General body text color. |
 | `background-color` | `colour` | `#ffffff` | General page background color. |
 | `content-background-color` | `colour` | `#ffffff` | Background color for content areas. |
@@ -91,8 +95,6 @@ These settings are already defined in the skeleton and can be customized or expa
 | `copyright-background-color` | `colour` | `#ffffff` | Background for the copyright area. |
 | `copyright-text-color` | `colour` | `#000000` | Text color for the copyright area. |
 | `label-background-color` | `colour` | `#cfcfcf` | Background color for labels/badges. |
-| `border-radius` | `pixels` | `5px` | Default border radius for elements. |
-| `container-width` | `pixels` | `1200px` | Maximum width of the site container. |
 
 ## Custom Templates
 

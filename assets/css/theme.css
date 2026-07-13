@@ -39,15 +39,12 @@ header {
     width: 100%;
     position: relative;
     z-index: 1000;
-
-    @media (max-width: 768px) {
-        padding: 1rem;
-    }
 }
 
 header nav {
     max-width: var(--container-width);
     margin: 0 auto;
+    padding: 0 1.5rem;
 }
 
 nav ul {
@@ -56,6 +53,7 @@ nav ul {
     margin: 0;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: flex-start;
     align-items: center;
 }
@@ -215,33 +213,19 @@ main {
     background-color: var(--content-background-color);
 }
 
-/*main .container {*/
-/*    max-width: var(--container-width);*/
-/*}*/
-
-/*main h1, main h2, main h3, main h4, main h5, main p {*/
-/*    max-width: var(--container-width);*/
-/*    margin: 0 auto;*/
-/*}*/
-
-/*section {*/
-/*    max-width: var(--container-width);*/
-/*    margin: 0 auto;*/
-/*}*/
-
-footer {
-    color: var(--footer-text-color);
-    padding: 2rem 0;
-    margin: 0 auto;
+/* Shared content wrapper: keeps text/blocks aligned to the same width and
+   gutter as the header and grids, on every template. */
+.container-element {
+    max-width: var(--container-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
 }
 
-footer .background-inner {
-    padding: 35px 0;
-}
-
-footer h1, footer h2, footer h3, footer h4, footer h5, footer h6 {
-    color: var(--footer-title-color);
-}
+/* The footer is composed of site-configured elements (sitepack_footer()); its background,
+   spacing and colours come from those elements, so the theme intentionally adds no footer
+   styling here (avoids duplicate/conflicting rules such as a double border-top). */
 
 #copyright {
     margin-top: 0;
@@ -270,6 +254,7 @@ footer h1, footer h2, footer h3, footer h4, footer h5, footer h6 {
 .sitemap section {
     max-width: var(--container-width);
     margin: 0 auto 2rem;
+    padding: 0 1.5rem;
 }
 
 .text-center {
@@ -279,6 +264,7 @@ footer h1, footer h2, footer h3, footer h4, footer h5, footer h6 {
 .sitemap h1 {
     max-width: var(--container-width);
     margin: 0 auto 1rem;
+    padding: 0 1.5rem;
 }
 
 .sitemap h2 {
@@ -312,6 +298,7 @@ footer h1, footer h2, footer h3, footer h4, footer h5, footer h6 {
     gap: 10px;
     max-width: var(--container-width);
     margin: 1rem auto;
+    padding: 0 1.5rem;
 }
 
 /* Category Layout Sidebar + Grid */
@@ -320,7 +307,7 @@ footer h1, footer h2, footer h3, footer h4, footer h5, footer h6 {
     gap: 2rem;
     max-width: var(--container-width);
     margin: 2rem auto;
-    padding: 0;
+    padding: 0 1.5rem;
 }
 
 .category-sidebar {
@@ -335,6 +322,7 @@ footer h1, footer h2, footer h3, footer h4, footer h5, footer h6 {
 .category-products-content .products-wrapper {
     margin: 0;
     max-width: none;
+    padding: 0;
 }
 
 @media (max-width: 992px) {
@@ -366,6 +354,13 @@ footer h1, footer h2, footer h3, footer h4, footer h5, footer h6 {
     text-align: left;
     height: 100%;
     margin-bottom: 10px;
+    border: 1px solid #eee;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.product-card:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
 }
 
 .product-card a {
@@ -427,10 +422,6 @@ footer h1, footer h2, footer h3, footer h4, footer h5, footer h6 {
     font-size: 0.9rem;
 }
 
-.product-price .new-price {
-    /*color: var(--main-color);*/
-}
-
 .product-rating {
     margin: 10px 0;
 }
@@ -470,6 +461,7 @@ footer h1, footer h2, footer h3, footer h4, footer h5, footer h6 {
 }
 
 .btn-primary {
+    display: inline-block;
     background-color: var(--main-color);
     color: var(--main-color-text);
     border: none;
@@ -478,6 +470,8 @@ footer h1, footer h2, footer h3, footer h4, footer h5, footer h6 {
     cursor: pointer;
     font-weight: 600;
     width: 100%;
+    text-decoration: none;
+    text-align: center;
     transition: background-color 0.2s;
 }
 
@@ -500,6 +494,28 @@ footer h1, footer h2, footer h3, footer h4, footer h5, footer h6 {
     padding: 1rem;
     border-radius: var(--border-radius);
     margin-bottom: 1rem;
+}
+
+.category-sub-categories {
+    margin-bottom: 2rem;
+}
+
+.category-sub-categories-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+}
+
+@media (max-width: 992px) {
+    .category-sub-categories-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .category-sub-categories-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* Category Card - Shopify Style */
@@ -659,7 +675,7 @@ footer h1, footer h2, footer h3, footer h4, footer h5, footer h6 {
     gap: 3rem;
     max-width: var(--container-width);
     margin: 2rem auto;
-    padding: 0;
+    padding: 0 1.5rem;
 }
 
 .product-gallery {
@@ -742,6 +758,7 @@ footer h1, footer h2, footer h3, footer h4, footer h5, footer h6 {
 
 .product-add-to-cart {
     display: flex;
+    align-items: flex-end;
     gap: 1rem;
 }
 
@@ -808,7 +825,6 @@ footer h1, footer h2, footer h3, footer h4, footer h5, footer h6 {
 
 .product-recommendations {
     margin-top: 4rem;
-    padding: 0 1rem;
 }
 
 .product-recommendations h2 {
@@ -820,8 +836,6 @@ footer h1, footer h2, footer h3, footer h4, footer h5, footer h6 {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
-    max-width: var(--container-width);
-    margin: 0 auto;
 }
 
 @media (max-width: 1024px) {
@@ -890,6 +904,64 @@ footer h1, footer h2, footer h3, footer h4, footer h5, footer h6 {
     }
 }
 
+/* Form Controls */
+label {
+    display: block;
+    margin-bottom: 0.35rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="search"],
+input[type="tel"],
+select,
+textarea {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    font: inherit;
+    color: var(--text-color);
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--main-color);
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+}
+
+textarea {
+    resize: vertical;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.product-quantity {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    width: 90px;
+}
+
+.product-quantity input[type="number"] {
+    text-align: center;
+}
+
 /* Cart Styles */
 .cart-form table {
     width: 100%;
@@ -944,7 +1016,7 @@ footer h1, footer h2, footer h3, footer h4, footer h5, footer h6 {
 #breadcrumbs {
     max-width: var(--container-width);
     margin: 1rem auto;
-    padding: 0;
+    padding: 0 1.5rem;
 }
 
 .breadcrumb {
@@ -1120,11 +1192,6 @@ footer h1, footer h2, footer h3, footer h4, footer h5, footer h6 {
     background-color: #218838;
 }
 
-
-/* Header nav: semantic, responsive without divs-inside-li */
-nav ul {
-    flex-wrap: wrap;
-}
 
 /* Icons next to hamburger on mobile; inline on desktop */
 .nav-icon {
@@ -1410,4 +1477,179 @@ nav ul {
 
 .category-filter-link:hover i {
     color: var(--main-color);
+}
+
+/* =========================
+   Account Page
+   ========================= */
+.account-dashboard {
+    padding: 2rem 0;
+}
+
+.account-dashboard h3 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.order-history,
+.account-addresses {
+    display: grid;
+    gap: 1rem;
+}
+
+.order-item,
+.address-item {
+    border: 1px solid #eee;
+    border-radius: var(--border-radius);
+    padding: 1rem 1.25rem;
+    transition: box-shadow 0.2s ease;
+}
+
+.order-item:hover,
+.address-item:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.order-item p,
+.address-item p {
+    margin: 0 0 0.4rem;
+}
+
+.order-item p:last-of-type,
+.address-item p:last-of-type {
+    margin-bottom: 0;
+}
+
+.account-actions {
+    margin-top: 2rem;
+}
+
+/* =========================
+   Landing Page Template
+   ========================= */
+.landing-hero {
+    padding: 4rem 0;
+}
+
+.landing-hero__inner {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.landing-hero__content {
+    flex: 1;
+}
+
+.landing-hero__title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 1rem;
+}
+
+.landing-hero__sub-head {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin: 0 0 1rem;
+    color: var(--main-color);
+}
+
+.landing-hero__text {
+    color: #555;
+    margin: 0 0 1.5rem;
+}
+
+.landing-hero__content .btn-primary {
+    width: auto;
+}
+
+.landing-hero__image {
+    flex: 1;
+}
+
+.landing-hero__image img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--border-radius);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.landing-usps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem;
+}
+
+.landing-usps li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+}
+
+.landing-usps li::before {
+    content: "✓";
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: var(--secondary-color);
+    color: var(--secondary-color-text);
+    font-size: 0.7rem;
+    flex-shrink: 0;
+}
+
+.landing-features {
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.landing-features__title {
+    margin: 0 0 2.5rem;
+}
+
+.landing-features__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    text-align: left;
+}
+
+.feature-card {
+    padding: 2rem;
+    border: 1px solid #eee;
+    border-radius: var(--border-radius);
+    background-color: var(--background-color);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.feature-card:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+}
+
+.feature-card__title {
+    margin: 0 0 0.5rem;
+    font-size: 1.15rem;
+}
+
+.feature-card__text {
+    margin: 0;
+    color: #555;
+}
+
+@media (max-width: 768px) {
+    .landing-hero__inner {
+        flex-direction: column;
+    }
+
+    .landing-features__grid {
+        grid-template-columns: 1fr;
+    }
 }

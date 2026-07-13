@@ -6,6 +6,8 @@
                 <a href="/" title="{{ site.name }}">
                     {% if site.logo %}
                         <img src="{{ site.logo }}" alt="{{ site.name }}"/>
+                    {% elseif site.icon %}
+                        <img src="{{ site.icon }}" alt="{{ site.name }}" class="site-icon"/>
                     {% else %}
                         <span class="site-name">
                             {{ site.name }}

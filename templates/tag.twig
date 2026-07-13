@@ -2,21 +2,23 @@
 
 {% block content %}
     {% app_block 'tag_before' %}
-    <h1>{{ tag.title }}</h1>
-    {% if tag.description %}
-        <div class="tag-description">
-            {{ tag.description }}
-        </div>
-    {% endif %}
+    <div class="container-element">
+        <h1>{{ tag.title }}</h1>
+        {% if tag.description %}
+            <div class="tag-description">
+                {{ tag.description }}
+            </div>
+        {% endif %}
 
-    <div class="blog-posts">
-        {% for article in tag.articles %}
-            {% app_block 'tag_article_before' %}
-            {% include 'snippets/blog-card.twig' with { article: article } %}
-            {% app_block 'tag_article_after' %}
-        {% else %}
-            <p>{{ 'general.no_posts' | trans }}</p>
-        {% endfor %}
+        <div class="blog-posts">
+            {% for article in tag.blogs %}
+                {% app_block 'tag_article_before' %}
+                {% include 'snippets/blog-card.twig' with { article: article } %}
+                {% app_block 'tag_article_after' %}
+            {% else %}
+                <p>{{ 'general.no_posts' | trans }}</p>
+            {% endfor %}
+        </div>
     </div>
     {% app_block 'tag_after' %}
 {% endblock %}

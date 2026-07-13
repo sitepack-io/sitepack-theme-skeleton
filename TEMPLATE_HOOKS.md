@@ -104,6 +104,23 @@ This file documents the available `app_block` hooks in the theme. These hooks al
 - `page_before`: At the start of the static page content.
 - `page_after`: At the end of the static page content.
 
+## Legal Page Hooks (templates/legal.twig)
+
+- `legal_page_before`: At the start of the legal page content.
+- `legal_page_after`: At the end of the legal page content.
+
+## Tag Page Hooks (templates/tag.twig)
+
+- `tag_before`: At the start of the tag listing page content.
+- `tag_after`: At the end of the tag listing page content.
+- `tag_article_before`: Before each article summary in the tag listing.
+- `tag_article_after`: After each article summary in the tag listing.
+
+## Landing Page Hooks (templates/landing-page.twig)
+
+- `landing_before`: At the start of the landing page content, before the hero section.
+- `landing_after`: At the end of the landing page content, after the features section.
+
 ## 404 Error Page Hooks (templates/404.twig)
 
 - `error_404_before`: At the start of the 404 page content.
