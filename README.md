@@ -5,14 +5,14 @@ This is a new theme skeleton for SitePack. This package is open-source and re-us
 ## Requirements
 
 To register and run an theme, you need a **SitePack Partner Account**.
-- **Register for free**: [https://sitepack.eu/partners](https://sitepack.eu/partners)
+- **Register for free**: [https://admin.sitepack.eu/partners](https://admin.sitepack.eu/partners)
 
 ## Resources
 
 - **[Theme Development Documentation](https://sitepack.dev/docs/themes/overview)** 
 - **[SitePack Developer documentation](https://sitepack.dev)** 
-- **[Partner Portal](https://sitepack.eu/partners)** 
-- **[SitePack Website Builder](https://sitepack.eu)**
+- **[Partner Portal](https://admin.sitepack.eu/partners)** 
+- **[SitePack Website Builder & Online store builder](https://sitepack.eu)**
 - **[SitePack documentation](https://help.sitepack.eu)**
 
 ## Features

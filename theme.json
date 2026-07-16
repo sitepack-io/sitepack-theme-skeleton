@@ -34,7 +34,7 @@
     {
       "type": "colour",
       "key": "header-background-color",
-      "default": "darkblue"
+      "default": "#ffffff"
     },
     {
       "type": "colour",

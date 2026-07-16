@@ -229,7 +229,7 @@ main {
 
 #copyright {
     margin-top: 0;
-    padding-top: 1.5rem;
+    padding: 1.5rem;
     font-size: 0.85rem;
     color: var(--copyright-text-color);
     background-color: var(--copyright-background-color);
