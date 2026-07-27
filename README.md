@@ -17,7 +17,7 @@ To register and run an theme, you need a **SitePack Partner Account**.
 
 ## Features
 
-- **Standard Templates**: Includes 404, account, article, blog, cart, category, index, page, and product templates.
+- **Standard Templates**: Includes 404, account, article, blog, cart, category, index, page, product, products, and search templates.
 - **Layouts & Snippets**: Base layout with modular snippets for header, footer, and product cards.
 - **Configurable**: Includes a basic `theme.json` and `settings_schema.json` to get started.
 - **Supported Features**: Ready for webshop, blog, and wishlist integrations.
@@ -40,6 +40,18 @@ The typical development workflow for a SitePack theme requires the **SitePack CL
 - `templates/`: Main and custom page templates (e.g., home, product, category, blog, account, cart).
 - `theme.json`: Theme metadata and supported features.
 - `.sitepackignore`: Files and folders to ignore when syncing with SitePack servers.
+
+### Optional page templates
+
+Two templates are optional, so themes written before they existed keep working. When
+a theme does not ship them the page still renders — it falls back to `page.twig`, which
+gives the chrome but no listing, so add them if the site uses these pages:
+
+- `products.twig` — the product overview at `/products`. Receives `products` and the
+  shop's categories as `sub_categories` (the same name `category.twig` uses).
+- `search.twig` — the search results at `/search/{keywords}`. Receives `keywords` and
+  `results`, each result carrying `type`, `url`, `title`, `description`, `image` and
+  `price`.
 
 ## Theme Configuration (`theme.json`)
 

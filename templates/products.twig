@@ -1,0 +1,48 @@
+{% extends 'layouts/base.twig' %}
+
+{#
+    The product overview at /products: the shop's categories plus a selection of
+    products. `sub_categories` holds the categories, named the same way category.twig
+    names its children so both listings can share the category card.
+
+    A theme without this file falls back to page.twig, which renders the chrome but
+    no listing — add products.twig to style the overview.
+#}
+{% block content %}
+    {% app_block 'products_before' %}
+
+    <div class="container-element">
+        <h1>{{ title }}</h1>
+    </div>
+
+    {% if sub_categories|length >= 1 %}
+        <div class="container-element category-sub-categories">
+            <div class="category-sub-categories-grid">
+                {% for sub_category in sub_categories %}
+                    {% include 'snippets/category-card.twig' with { category: {
+                        url: sub_category.slug,
+                        categoryName: sub_category.name,
+                        label: sub_category.label|default(''),
+                        backgroundImage: sub_category.backgroundImage|default(sub_category.image|default(null))
+                    } } %}
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="container-element category-products-content">
+        {% if products|length >= 1 %}
+            <div class="products-wrapper">
+                {% for product in products %}
+                    {% app_block 'product_card_before' %}
+                    {% include 'snippets/product-card.twig' %}
+                    {% app_block 'product_card_after' %}
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>{{ 'general.no_products' | trans }}</p>
+        {% endif %}
+    </div>
+
+    {% app_block 'products_after' %}
+{% endblock %}
