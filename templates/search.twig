@@ -1,0 +1,49 @@
+{% extends 'layouts/base.twig' %}
+
+{#
+    The search results at /search/{keywords}. `results` holds the matches — each with
+    a type (content, product, blog, …), url, title, description and an optional image —
+    and `keywords` the term that was searched for.
+
+    A theme without this file falls back to page.twig, which renders the chrome but no
+    results — add search.twig to style them.
+#}
+{% block content %}
+    {% app_block 'search_before' %}
+
+    <div class="container-element search-results">
+        {% if keywords is not empty and results|length >= 1 %}
+            <h1>{{ 'search.results_for' | trans({'%keywords%': keywords}) }}</h1>
+
+            {% for item in results %}
+                <article class="search-result search-result-{{ item.type }}">
+                    {% if item.image is not empty %}
+                        <a href="{{ item.url }}" class="search-result__image">
+                            <img src="{{ item.image }}" alt="{{ item.title }}" loading="lazy"/>
+                        </a>
+                    {% endif %}
+
+                    <h2 class="search-result__title">
+                        <a href="{{ item.url }}">{{ item.title }}</a>
+                    </h2>
+
+                    {% if item.description is not empty %}
+                        <p class="search-result__description">{{ item.description }}</p>
+                    {% endif %}
+
+                    {% if item.price is not empty %}
+                        <p class="search-result__price">{{ item.price }}</p>
+                    {% endif %}
+                </article>
+            {% endfor %}
+        {% elseif keywords is not empty %}
+            <h1>{{ 'search.no_results' | trans({'%keywords%': keywords}) }}</h1>
+            <p>{{ 'search.try_again' | trans }}</p>
+        {% else %}
+            <h1>{{ 'search.title' | trans }}</h1>
+            <p>{{ 'search.try_again' | trans }}</p>
+        {% endif %}
+    </div>
+
+    {% app_block 'search_after' %}
+{% endblock %}

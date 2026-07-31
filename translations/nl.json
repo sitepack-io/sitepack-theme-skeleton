@@ -66,5 +66,11 @@
     "404_title": "Pagina niet gevonden (404)",
     "404_message": "Sorry, de pagina die je zoekt bestaat niet.",
     "return_home": "Terug naar Home"
+  },
+  "search": {
+    "title": "Zoeken",
+    "results_for": "Zoekresultaten voor \"%keywords%\"",
+    "no_results": "Geen resultaten gevonden voor \"%keywords%\"",
+    "try_again": "Probeer een andere zoekterm."
   }
 }
