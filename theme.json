@@ -148,7 +148,7 @@
       "type": "colour",
       "key": "promo-price-color",
       "label": "Promotional price colour",
-      "default": "#e44d26"
+      "default": "#c33f1c"
     },
     {
       "type": "colour",
@@ -160,13 +160,13 @@
       "type": "colour",
       "key": "stock-error-color",
       "label": "Out of stock status colour",
-      "default": "#e74c3c"
+      "default": "#c9302c"
     },
     {
       "type": "colour",
       "key": "success-color",
       "label": "Success button background colour",
-      "default": "#28a745"
+      "default": "#1e7e34"
     },
     {
       "type": "colour",

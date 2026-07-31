@@ -140,10 +140,10 @@ that nothing reads.
 | `input-border-color` | `colour` | `#dddddd` | Form field and table borders. |
 | `disabled-color` | `colour` | `#cccccc` | Disabled button background. |
 | `rating-color` | `colour` | `#ca992f` | Rating star fill. |
-| `promo-price-color` | `colour` | `#e44d26` | Promotional price. |
+| `promo-price-color` | `colour` | `#c33f1c` | Promotional price. |
 | `stock-warning-color` | `colour` | `#a3690c` | Backorder stock status. |
-| `stock-error-color` | `colour` | `#e74c3c` | Out of stock status. |
-| `success-color` | `colour` | `#28a745` | Success button background. |
+| `stock-error-color` | `colour` | `#c9302c` | Out of stock status. |
+| `success-color` | `colour` | `#1e7e34` | Success button background. |
 | `success-text-color` | `colour` | `#ffffff` | Success button text. |
 
 ## Custom Templates
