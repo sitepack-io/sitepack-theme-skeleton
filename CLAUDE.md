@@ -319,7 +319,11 @@ Full reference: <https://sitepack.dev/docs/themes/twig-objects>. Summary:
 
 **Everywhere:** `site` (`.name`, `.locale`, `.logo`, `.icon`, `.domain`, `.socialMedia`,
 `.getSetting(…)`), `settings` (feature flags, e.g. `settings.getSetting('store_enabled')`),
-`navigation`, `seo`, `translations`.
+`navigation`, `seo`, `translations`, `pageHreflang`.
+
+Use `pageHreflang` for `<html lang>` — the platform supplies it as a ready-to-use BCP-47
+tag, page-aware on translated sites. Do not derive it from `site.locale`, which is the raw
+`nl_NL` form deliberately kept that way for `og:locale` and the language switchers.
 
 **Per template:**
 
