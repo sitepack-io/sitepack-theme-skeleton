@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="{{ site.locale }}">
+{# site.locale is stored as "nl_NL"; the lang attribute needs BCP-47 ("nl-NL").
+   pageHreflang carries the language of this specific page on translated sites. #}
+<html lang="{{ pageHreflang|default(site.locale|replace({'_': '-'})) }}">
 <head>
     <title>{{ sitepack_title() }}</title>
     <meta charset="UTF-8">

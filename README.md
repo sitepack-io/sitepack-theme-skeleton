@@ -88,25 +88,63 @@ The following settings are **mandatory** and are always added from SitePack core
 
 #### Available Settings in Skeleton
 
-These settings are already defined in the skeleton and can be customized or expanded:
+These settings are already defined in the skeleton and can be customized or expanded.
+Every colour the theme paints is one of these — `assets/css/theme.css` contains no
+hardcoded colour values, so changing a setting changes the whole site consistently.
+See [CLAUDE.md](CLAUDE.md) for the rules this follows.
+
+Note that there are deliberately no `footer-*` colour settings: the footer is composed of
+site-configured elements rendered by `sitepack_footer()`, and each element carries its own
+colours. A `footer-background-color` setting in a custom theme would emit a CSS variable
+that nothing reads.
+
+**Text**
 
 | Key | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
 | `text-color` | `colour` | `#333333` | General body text color. |
+| `muted-text-color` | `colour` | `#666666` | Secondary text (product meta, descriptions). |
+| `subtle-text-color` | `colour` | `#999999` | Tertiary text (struck prices, separators). |
+
+**Surfaces**
+
+| Key | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
 | `background-color` | `colour` | `#ffffff` | General page background color. |
 | `content-background-color` | `colour` | `#ffffff` | Background color for content areas. |
+| `surface-color` | `colour` | `#f8f9fa` | Subtle hover and alternate backgrounds. |
+| `card-background-color` | `colour` | `#ffffff` | Raised surfaces: dropdowns, modals, cards. |
+| `image-background-color` | `colour` | `#f5f5f5` | Image placeholder backgrounds. |
+| `border-color` | `colour` | `#eeeeee` | Borders and dividers. |
+| `shadow-color` | `colour` | `#000000` | Base colour for shadows and overlays. |
 | `blog-background-color` | `colour` | `#ffffff` | Background color for blog pages. |
 | `category-background-color` | `colour` | `#ffffff` | Background color for category pages. |
-| `header-background-color` | `colour` | `darkblue` | Background color for the header. |
-| `header-text-color` | `colour` | `#ffffff` | Text color in the header. |
+
+**Chrome**
+
+| Key | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `header-background-color` | `colour` | `#ffffff` | Background color for the header. |
+| `header-text-color` | `colour` | `#333333` | Text color in the header. |
 | `header-topbar-color` | `colour` | `#2b2b2b` | Background color for the top bar. |
 | `header-topbar-text-color` | `colour` | `#ffffff` | Text color in the top bar. |
-| `footer-background-color` | `colour` | `#3f434a` | Background color for the footer. |
-| `footer-text-color` | `colour` | `#f1f1f1` | Text color in the footer. |
-| `footer-title-color` | `colour` | `#f1f1f1` | Title color in the footer. |
 | `copyright-background-color` | `colour` | `#ffffff` | Background for the copyright area. |
 | `copyright-text-color` | `colour` | `#000000` | Text color for the copyright area. |
 | `label-background-color` | `colour` | `#cfcfcf` | Background color for labels/badges. |
+
+**Forms and states**
+
+| Key | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `input-background-color` | `colour` | `#ffffff` | Form field background. |
+| `input-border-color` | `colour` | `#dddddd` | Form field and table borders. |
+| `disabled-color` | `colour` | `#cccccc` | Disabled button background. |
+| `rating-color` | `colour` | `#ca992f` | Rating star fill. |
+| `promo-price-color` | `colour` | `#e44d26` | Promotional price. |
+| `stock-warning-color` | `colour` | `#f39c12` | Backorder stock status. |
+| `stock-error-color` | `colour` | `#e74c3c` | Out of stock status. |
+| `success-color` | `colour` | `#28a745` | Success button background. |
+| `success-text-color` | `colour` | `#ffffff` | Success button text. |
 
 ## Custom Templates
 
