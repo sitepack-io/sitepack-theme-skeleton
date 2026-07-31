@@ -22,7 +22,7 @@
       "type": "colour",
       "key": "subtle-text-color",
       "label": "Tertiary text colour (struck prices, separators)",
-      "default": "#999999"
+      "default": "#767676"
     },
     {
       "type": "colour",
@@ -154,7 +154,7 @@
       "type": "colour",
       "key": "stock-warning-color",
       "label": "Backorder stock status colour",
-      "default": "#f39c12"
+      "default": "#a3690c"
     },
     {
       "type": "colour",

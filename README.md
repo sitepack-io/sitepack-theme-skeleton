@@ -104,7 +104,7 @@ that nothing reads.
 | :--- | :--- | :--- | :--- |
 | `text-color` | `colour` | `#333333` | General body text color. |
 | `muted-text-color` | `colour` | `#666666` | Secondary text (product meta, descriptions). |
-| `subtle-text-color` | `colour` | `#999999` | Tertiary text (struck prices, separators). |
+| `subtle-text-color` | `colour` | `#767676` | Tertiary text (struck prices, separators). |
 
 **Surfaces**
 
@@ -141,7 +141,7 @@ that nothing reads.
 | `disabled-color` | `colour` | `#cccccc` | Disabled button background. |
 | `rating-color` | `colour` | `#ca992f` | Rating star fill. |
 | `promo-price-color` | `colour` | `#e44d26` | Promotional price. |
-| `stock-warning-color` | `colour` | `#f39c12` | Backorder stock status. |
+| `stock-warning-color` | `colour` | `#a3690c` | Backorder stock status. |
 | `stock-error-color` | `colour` | `#e74c3c` | Out of stock status. |
 | `success-color` | `colour` | `#28a745` | Success button background. |
 | `success-text-color` | `colour` | `#ffffff` | Success button text. |
