@@ -56,17 +56,24 @@ This file documents the available `app_block` hooks in the theme. These hooks al
 - `category_before`: At the start of the category page content.
 - `category_after`: At the end of the category page content.
 
+## Product Overview Hooks (templates/products.twig)
+
+- `products_before`: At the start of the product overview content.
+- `products_after`: At the end of the product overview content.
+
+## Search Page Hooks (templates/search.twig)
+
+- `search_before`: At the start of the search results content.
+- `search_after`: At the end of the search results content.
+
 ## Cart Page Hooks (templates/cart.twig)
 
 - `cart_before`: At the start of the cart page content.
 - `cart_after`: At the end of the cart page content.
-- `cart_item_before`: Before each line item row in the cart.
-- `cart_item_after`: After each line item row in the cart.
-- `cart_item_image_before`: Before the product image in a cart item.
-- `cart_item_image_after`: After the product image in a cart item.
-- `cart_item_quantity_before`: Before the quantity input in a cart item.
-- `cart_item_quantity_after`: After the quantity input in a cart item.
-- `cart_buttons_after`: In the cart summary, after the checkout buttons.
+
+The cart table itself is rendered by `sitepack_cart()`, not by the theme, so the theme
+cannot expose per-line-item hooks (`cart_item_*`, `cart_buttons_after`). Wrap the whole
+cart with `cart_before` / `cart_after` instead.
 
 ## Blog Page Hooks (templates/blog.twig)
 

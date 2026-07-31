@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="{{ site.locale }}">
+{# pageHreflang is the BCP-47 tag for this page, supplied ready-to-use by the platform.
+   Do not build it from site.locale: that is the raw "nl_NL" form, kept that way because
+   og:locale and the language switchers need it. #}
+<html lang="{{ pageHreflang }}">
 <head>
     <title>{{ sitepack_title() }}</title>
     <meta charset="UTF-8">

@@ -2,7 +2,9 @@
     <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>
     <p class="article-meta">{{ 'general.published_on' | trans({'%date%': article.created | date('M d, Y')}) }}</p>
     {% if article.image %}
+        {% app_block 'blog_article_image_before' %}
         <img src="{{ article.image }}" alt="{{ article.title }}">
+        {% app_block 'blog_article_image_after' %}
     {% endif %}
     <div class="article-excerpt">
         {{ article.previewText }}

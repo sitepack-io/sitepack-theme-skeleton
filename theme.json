@@ -9,77 +9,170 @@
     {
       "type": "colour",
       "key": "text-color",
+      "label": "Body text colour",
       "default": "#333333"
     },
     {
       "type": "colour",
+      "key": "muted-text-color",
+      "label": "Secondary text colour (meta, descriptions)",
+      "default": "#666666"
+    },
+    {
+      "type": "colour",
+      "key": "subtle-text-color",
+      "label": "Tertiary text colour (struck prices, separators)",
+      "default": "#767676"
+    },
+    {
+      "type": "colour",
       "key": "background-color",
+      "label": "Page background colour",
       "default": "#ffffff"
     },
     {
       "type": "colour",
       "key": "content-background-color",
+      "label": "Content area background colour",
       "default": "#ffffff"
     },
     {
       "type": "colour",
+      "key": "surface-color",
+      "label": "Subtle surface colour (hover and alternate backgrounds)",
+      "default": "#f8f9fa"
+    },
+    {
+      "type": "colour",
+      "key": "card-background-color",
+      "label": "Raised surface colour (dropdowns, modals, cards)",
+      "default": "#ffffff"
+    },
+    {
+      "type": "colour",
+      "key": "image-background-color",
+      "label": "Image placeholder background colour",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "colour",
+      "key": "border-color",
+      "label": "Border and divider colour",
+      "default": "#eeeeee"
+    },
+    {
+      "type": "colour",
+      "key": "shadow-color",
+      "label": "Shadow and overlay colour",
+      "default": "#000000"
+    },
+    {
+      "type": "colour",
       "key": "blog-background-color",
+      "label": "Blog page background colour",
       "default": "#ffffff"
     },
     {
       "type": "colour",
       "key": "category-background-color",
+      "label": "Category page background colour",
       "default": "#ffffff"
     },
     {
       "type": "colour",
       "key": "header-background-color",
+      "label": "Header background colour",
       "default": "#ffffff"
     },
     {
       "type": "colour",
       "key": "header-text-color",
-      "default": "#ffffff"
+      "label": "Header text colour",
+      "default": "#333333"
     },
     {
       "type": "colour",
       "key": "header-topbar-color",
+      "label": "Top bar background colour",
       "default": "#2b2b2b"
     },
     {
       "type": "colour",
       "key": "header-topbar-text-color",
+      "label": "Top bar text colour",
       "default": "#ffffff"
     },
     {
       "type": "colour",
-      "key": "footer-text-color",
-      "default": "#f1f1f1"
-    },
-    {
-      "type": "colour",
-      "key": "footer-background-color",
-      "default": "#3f434a"
-    },
-    {
-      "type": "colour",
-      "key": "footer-title-color",
-      "default": "#f1f1f1"
-    },
-    {
-      "type": "colour",
       "key": "copyright-background-color",
+      "label": "Copyright bar background colour",
       "default": "#ffffff"
     },
     {
       "type": "colour",
       "key": "copyright-text-color",
+      "label": "Copyright bar text colour",
       "default": "#000000"
     },
     {
       "type": "colour",
       "key": "label-background-color",
+      "label": "Label and badge background colour",
       "default": "#cfcfcf"
+    },
+    {
+      "type": "colour",
+      "key": "input-background-color",
+      "label": "Form field background colour",
+      "default": "#ffffff"
+    },
+    {
+      "type": "colour",
+      "key": "input-border-color",
+      "label": "Form field and table border colour",
+      "default": "#dddddd"
+    },
+    {
+      "type": "colour",
+      "key": "disabled-color",
+      "label": "Disabled button colour",
+      "default": "#cccccc"
+    },
+    {
+      "type": "colour",
+      "key": "rating-color",
+      "label": "Rating star colour",
+      "default": "#ca992f"
+    },
+    {
+      "type": "colour",
+      "key": "promo-price-color",
+      "label": "Promotional price colour",
+      "default": "#c33f1c"
+    },
+    {
+      "type": "colour",
+      "key": "stock-warning-color",
+      "label": "Backorder stock status colour",
+      "default": "#a3690c"
+    },
+    {
+      "type": "colour",
+      "key": "stock-error-color",
+      "label": "Out of stock status colour",
+      "default": "#c9302c"
+    },
+    {
+      "type": "colour",
+      "key": "success-color",
+      "label": "Success button background colour",
+      "default": "#1e7e34"
+    },
+    {
+      "type": "colour",
+      "key": "success-text-color",
+      "label": "Success button text colour",
+      "default": "#ffffff"
     }
   ],
   "templates": [
