@@ -1,6 +1,6 @@
 <div class="product-card">
     {% app_block 'product_card_before' %}
-    <a href="{{ product.url }}">
+    <a href="{{ sitepack_product_slug(product) }}">
         {% app_block 'product_card_image_before' %}
         <div class="product-image">
             {% if product.first_image.thumbnail != null %}

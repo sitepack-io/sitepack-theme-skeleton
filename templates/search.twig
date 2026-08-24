@@ -16,15 +16,25 @@
             <h1>{{ 'search.results_for' | trans({'%keywords%': keywords}) }}</h1>
 
             {% for item in results %}
+                {# A result is addressed in the master language; resolve it to the one
+                   this page is being read in, per kind of content it turned out to be. #}
+                {% if item.type == 'product' %}
+                    {% set item_url = sitepack_product_slug(item) %}
+                {% elseif item.type == 'category' %}
+                    {% set item_url = sitepack_category_slug(item) %}
+                {% else %}
+                    {% set item_url = sitepack_slug(item.url) %}
+                {% endif %}
+
                 <article class="search-result search-result-{{ item.type }}">
                     {% if item.image is not empty %}
-                        <a href="{{ item.url }}" class="search-result__image">
+                        <a href="{{ item_url }}" class="search-result__image">
                             <img src="{{ item.image }}" alt="{{ item.title }}" loading="lazy"/>
                         </a>
                     {% endif %}
 
                     <h2 class="search-result__title">
-                        <a href="{{ item.url }}">{{ item.title }}</a>
+                        <a href="{{ item_url }}">{{ item.title }}</a>
                     </h2>
 
                     {% if item.description is not empty %}

@@ -105,6 +105,8 @@ sitepack_head                  sitepack_title              sitepack_scripts
 sitepack_cookies               sitepack_navigation         sitepack_breadcrumbs
 sitepack_translations          sitepack_translations_list  sitepack_languages
 sitepack_language_switcher     sitepack_language_name      sitepack_language_flag
+sitepack_slug                  sitepack_product_slug       sitepack_category_slug
+sitepack_blog_slug
 sitepack_content               sitepack_elements           sitepack_content_legal
 sitepack_footer                sitepack_legal_links        sitepack_copyright
 sitepack_icon                  sitepack_live_search        sitepack_live_search_icon
@@ -345,6 +347,36 @@ tag, page-aware on translated sites. Do not derive it from `site.locale`, which 
 
 Prices always go through `{{ sitepack_price(product.priceCents) }}` — never format cents
 yourself.
+
+### Internal links
+
+Every internal link goes through a slug helper, never straight into `href`. A listing is
+assembled in the store's **main** language, so `href="{{ product.url }}"` throws a visitor
+reading `/de/` back out of German — and pasting the language prefix in front of that same
+slug names an address whose canonical is somewhere else.
+
+Pass the **item**, not one of its fields: each item carries the address it has in every
+language, and the helper reads the right one off it.
+
+```twig
+<a href="{{ sitepack_slug('pricing') }}">…</a>          {# a page, by its default slug #}
+<a href="{{ sitepack_product_slug(product) }}">…</a>    {# a product #}
+<a href="{{ sitepack_category_slug(category) }}">…</a>  {# a category #}
+<a href="{{ sitepack_blog_slug(article) }}">…</a>       {# a blog post #}
+```
+
+A bare slug or path is still accepted for links you write by hand. If you build a hash for
+a card snippet instead of passing the item, carry `translations` across with it:
+
+```twig
+{% include 'snippets/category-card.twig' with { category: {
+    url: sub_category.slug,
+    translations: sub_category.translations|default([]),
+    categoryName: sub_category.name
+} } %}
+```
+
+They are safe on a single-language store — nothing to guard.
 
 ## 6. Hooks and translations
 
