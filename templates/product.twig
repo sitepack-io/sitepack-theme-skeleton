@@ -50,9 +50,9 @@
                     {% endif %}
 
                     {% if product.pricePromoCents > 0 %}
-                        <span class="promo-price">{{ sitepack_price(product.pricePromoCents) }}</span>
+                        <span class="promo-price" data-variant-price>{{ sitepack_price(product.pricePromoCents) }}</span>
                     {% else %}
-                        <span class="price">{{ sitepack_price(product.priceCents) }}</span>
+                        <span class="price" data-variant-price>{{ sitepack_price(product.priceCents) }}</span>
                     {% endif %}
 
                     {% app_block 'product_price_after' %}
@@ -73,7 +73,11 @@
             </div>
 
             {% app_block 'product_stock_before' %}
-            <div class="product-stock-info" data-product-id="{{ product.uuid }}"></div>
+            {# With options the variant picker reports availability per combination, so the
+               aggregate product stock line would only contradict it. #}
+            {% if not (product.optionSet and product.optionSet.options|length > 0) %}
+                <div class="product-stock-info" data-product-id="{{ product.uuid }}"></div>
+            {% endif %}
             {% app_block 'product_stock_after' %}
 
             {% if product.shortDescription %}
@@ -101,14 +105,16 @@
                             </div>
                         {% endif %}
 
-                        <div class="product-quantity">
-                            <label for="quantity">{{ 'product.quantity' | trans }}</label>
-                            <input type="number" name="quantity" id="quantity" value="1" min="1">
+                        <div class="product-buy">
+                            <div class="product-quantity">
+                                <label for="quantity">{{ 'product.quantity' | trans }}</label>
+                                <input type="number" name="quantity" id="quantity" value="1" min="1">
+                            </div>
+                            <input type="hidden" name="id" value="{{ product.uuid }}">
+                            <button type="submit" class="btn-primary" disabled>
+                                {{ 'product.add_to_cart' | trans }}
+                            </button>
                         </div>
-                        <input type="hidden" name="id" value="{{ product.uuid }}">
-                        <button type="submit" class="btn-primary" disabled>
-                            {{ 'product.add_to_cart' | trans }}
-                        </button>
 
                         {% app_block 'product_form_after' %}
                     </form>
