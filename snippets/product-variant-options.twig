@@ -69,7 +69,13 @@
         transition: opacity .12s, border-width .12s;
     }
     .sp-variant-value:hover { opacity: 1; }
-    .sp-variant-value.is-active { opacity: 1; border-width: 2px; font-weight: 700; }
+    .sp-variant-value.is-active {
+        opacity: 1;
+        background: var(--main-color, #1e3346);
+        border-color: var(--main-color, #1e3346);
+        color: #ffffff;
+        font-weight: 700;
+    }
     .sp-variant-value.is-unavailable {
         opacity: .35;
         text-decoration: line-through;
