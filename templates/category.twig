@@ -19,6 +19,7 @@
                 {% for sub_category in sub_categories %}
                     {% include 'snippets/category-card.twig' with { category: {
                         url: sub_category.slug,
+                        translations: sub_category.translations|default([]),
                         categoryName: sub_category.name,
                         label: sub_category.label|default(''),
                         backgroundImage: sub_category.backgroundImage|default(sub_category.image|default(null))

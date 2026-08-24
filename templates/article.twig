@@ -29,7 +29,7 @@
         </div>
         
         <div class="article-navigation">
-            <a href="{{ blog.url }}">{{ 'general.back_to' | trans({'%title%': blog.title}) }}</a>
+            <a href="{{ sitepack_blog_slug(blog.url) }}">{{ 'general.back_to' | trans({'%title%': blog.title}) }}</a>
         </div>
     </article>
     {% app_block 'article_after' %}

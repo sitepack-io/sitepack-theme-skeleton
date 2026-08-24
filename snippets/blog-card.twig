@@ -1,5 +1,5 @@
 <article class="blog-post-summary">
-    <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>
+    <h2><a href="{{ sitepack_blog_slug(article) }}">{{ article.title }}</a></h2>
     <p class="article-meta">{{ 'general.published_on' | trans({'%date%': article.created | date('M d, Y')}) }}</p>
     {% if article.image %}
         {% app_block 'blog_article_image_before' %}
@@ -9,5 +9,5 @@
     <div class="article-excerpt">
         {{ article.previewText }}
     </div>
-    <a href="{{ article.url }}">{{ 'general.read_more' | trans }}</a>
+    <a href="{{ sitepack_blog_slug(article) }}">{{ 'general.read_more' | trans }}</a>
 </article>
