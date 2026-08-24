@@ -5,19 +5,19 @@
     {% if product.categorySubSub %}
         <div class="container-element product-extra-info">
             <p>
-                &laquo; <a href="{{ product.categorySubSub.url }}">{{ product.categorySubSub.name }}</a>
+                &laquo; <a href="{{ sitepack_category_slug(product.categorySubSub) }}">{{ product.categorySubSub.name }}</a>
             </p>
         </div>
     {% elseif product.categorySub %}
         <div class="container-element product-extra-info">
             <p>
-                &laquo; <a href="{{ product.categorySub.url }}">{{ product.categorySub.name }}</a>
+                &laquo; <a href="{{ sitepack_category_slug(product.categorySub) }}">{{ product.categorySub.name }}</a>
             </p>
         </div>
     {% elseif product.categoryMain %}
         <div class="container-element product-extra-info">
             <p>
-                &laquo; <a href="{{ product.categoryMain.url }}">{{ product.categoryMain.name }}</a>
+                &laquo; <a href="{{ sitepack_category_slug(product.categoryMain) }}">{{ product.categoryMain.name }}</a>
             </p>
         </div>
     {% endif %}
@@ -89,7 +89,12 @@
                     <form action="/cart/add" method="post" class="product-add-to-cart">
                         {% app_block 'product_form_before' %}
 
-                        {# Simplified variant handling #}
+                        {# SPD-2051 new single-product options & variants selector. #}
+                        {% if product.optionSet and product.optionSet.options|length > 0 %}
+                            {% include 'snippets/product-variant-options.twig' %}
+                        {% endif %}
+
+                        {# Simplified variant handling (legacy linked-product variants) #}
                         {% if product.variants.totalProducts > 1 %}
                             <div class="product-variants">
                                 {# You would typically loop through attributes here #}
