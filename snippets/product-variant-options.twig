@@ -41,34 +41,38 @@
         </div>
     {% endfor %}
 
-    <div class="sp-variant-summary">
-        <span class="sp-variant-price" data-variant-price></span>
-        <span class="sp-variant-availability" data-variant-availability></span>
-    </div>
+    <div class="sp-variant-availability" data-variant-availability hidden></div>
 </div>
 
 <style>
-    .sp-variant-options { margin: 0 0 1rem; }
-    .sp-variant-option { margin-bottom: 1.1rem; }
-    .sp-variant-option__label { display: block; margin-bottom: .5rem; }
-    .sp-variant-option__label strong { font-weight: 700; }
-    .sp-variant-selected { color: inherit; opacity: .75; }
+    .sp-variant-options { margin: 0; }
+    .sp-variant-option { margin-bottom: .9rem; }
+    .sp-variant-option__label {
+        display: block;
+        margin-bottom: .4rem;
+        font-size: .95rem;
+    }
+    .sp-variant-option__label strong { font-weight: 600; }
+    /* The chosen value reads as a quiet caption next to the label, not a second heading. */
+    .sp-variant-selected { color: inherit; opacity: .55; font-size: .85em; margin-left: .15rem; }
     .sp-variant-option__values { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; }
     .sp-variant-option__values--swatches { gap: 10px; }
 
     /* Text option values */
     .sp-variant-value {
-        padding: .45rem .85rem;
-        border: 1px solid currentColor;
-        border-radius: 4px;
+        min-width: 2.75rem;
+        padding: .4rem .7rem;
+        border: 1px solid color-mix(in srgb, currentColor 30%, transparent);
+        border-radius: 6px;
         background: transparent;
         color: inherit;
+        font-size: .9rem;
+        text-align: center;
         cursor: pointer;
         line-height: 1.2;
-        opacity: .7;
-        transition: opacity .12s, border-width .12s;
+        transition: border-color .12s, background-color .12s, color .12s;
     }
-    .sp-variant-value:hover { opacity: 1; }
+    .sp-variant-value:hover { border-color: color-mix(in srgb, currentColor 60%, transparent); }
     .sp-variant-value.is-active {
         opacity: 1;
         background: var(--main-color, #1e3346);
@@ -82,14 +86,21 @@
         cursor: not-allowed;
     }
 
-    /* Colour option values: the same round dots as the category filters. */
+    /* Colour option values: the same round dots as the category filters. The extra
+       resets undo the text-chip base styles (min-width, borders, active fill) so the
+       dot stays perfectly round. */
     .sp-variant-value--swatch {
+        min-width: 0;
         padding: 2px;
         border: 0;
         border-radius: 50%;
         background: transparent;
         opacity: 1;
         line-height: 0;
+    }
+    .sp-variant-value--swatch.is-active {
+        background: transparent;
+        border-color: transparent;
     }
     .sp-variant-value--swatch .color-swatch {
         position: relative;
@@ -128,9 +139,9 @@
         cursor: not-allowed;
     }
 
-    .sp-variant-summary { margin: .35rem 0 1rem; }
-    .sp-variant-price { font-weight: 700; margin-right: .75rem; }
-    .sp-variant-availability.is-unavailable { color: #b00020; font-weight: 600; }
+    /* Only surfaces when the chosen combination is unavailable, so it stays quiet. */
+    .sp-variant-availability { margin-top: .5rem; font-size: .9rem; color: #b00020; font-weight: 600; }
+    .sp-variant-availability[hidden] { display: none; }
 </style>
 
 <script>
@@ -150,9 +161,22 @@
             var selected = {};
 
             var form = root.closest('form') || document.querySelector('form.product-add-to-cart');
-            var priceEl = root.querySelector('[data-variant-price]');
             var availabilityEl = root.querySelector('[data-variant-availability]');
             var unavailableLabel = {{ 'product.out_of_stock'|trans|json_encode|raw }};
+
+            // Drive the main PDP price instead of showing a second price block, so the
+            // page keeps one price. Themes can mark their price node with
+            // [data-variant-price]; otherwise fall back to the standard price element.
+            var priceTargets = document.querySelectorAll('[data-variant-price], .product-price-section .price');
+            var originalPrices = [];
+            priceTargets.forEach(function (el) { originalPrices.push(el.innerHTML); });
+
+            function setPrice(text) {
+                priceTargets.forEach(function (el) { el.textContent = text; });
+            }
+            function restorePrice() {
+                priceTargets.forEach(function (el, i) { el.innerHTML = originalPrices[i]; });
+            }
 
             function hiddenField() {
                 if (!form) {
@@ -190,10 +214,10 @@
 
                 if (!variant) {
                     if (field) { field.value = ''; }
-                    if (priceEl) { priceEl.textContent = ''; }
+                    restorePrice();
                     if (availabilityEl) {
                         availabilityEl.textContent = '';
-                        availabilityEl.classList.remove('is-unavailable');
+                        availabilityEl.hidden = true;
                     }
                     if (submit) { submit.disabled = true; }
                     return;
@@ -205,13 +229,15 @@
                     window.viewProductImage(variant.image.url);
                 }
 
-                if (priceEl) {
-                    priceEl.textContent = variant.pricePretty ? ('€ ' + variant.pricePretty) : '';
+                if (variant.pricePretty) {
+                    setPrice('€ ' + variant.pricePretty);
+                } else {
+                    restorePrice();
                 }
 
                 if (availabilityEl) {
                     availabilityEl.textContent = variant.available ? '' : unavailableLabel;
-                    availabilityEl.classList.toggle('is-unavailable', !variant.available);
+                    availabilityEl.hidden = variant.available;
                 }
 
                 if (submit) { submit.disabled = !variant.available; }

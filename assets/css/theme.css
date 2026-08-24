@@ -761,6 +761,14 @@ main {
 
 .product-add-to-cart {
     display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.5rem;
+}
+
+/* Quantity + add-to-cart on one aligned row, beneath the variant options. */
+.product-buy {
+    display: flex;
     align-items: flex-end;
     gap: 1rem;
 }
