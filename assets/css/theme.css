@@ -1664,3 +1664,103 @@ textarea {
         grid-template-columns: 1fr;
     }
 }
+
+/* ===== SPD-2051 product variant options (snippets/product-variant-options.twig) ===== */
+.sp-variant-options { margin: 0; }
+.sp-variant-option { margin-bottom: .9rem; }
+.sp-variant-option__label {
+    display: block;
+    margin-bottom: .4rem;
+    font-size: .95rem;
+}
+.sp-variant-option__label strong { font-weight: 600; }
+/* The chosen value reads as a quiet caption next to the label, not a second heading. */
+.sp-variant-selected { color: inherit; opacity: .55; font-size: .85em; margin-left: .15rem; }
+.sp-variant-option__values { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; }
+.sp-variant-option__values--swatches { gap: 10px; }
+
+/* Text option values */
+.sp-variant-value {
+    min-width: 2.75rem;
+    padding: .4rem .7rem;
+    border: 1px solid color-mix(in srgb, currentColor 30%, transparent);
+    border-radius: 6px;
+    background: transparent;
+    color: inherit;
+    font-size: .9rem;
+    text-align: center;
+    cursor: pointer;
+    line-height: 1.2;
+    transition: border-color .12s, background-color .12s, color .12s;
+}
+.sp-variant-value:hover { border-color: color-mix(in srgb, currentColor 60%, transparent); }
+.sp-variant-value.is-active {
+    opacity: 1;
+    background: var(--main-color, #1e3346);
+    border-color: var(--main-color, #1e3346);
+    color: #ffffff;
+    font-weight: 700;
+}
+.sp-variant-value.is-unavailable {
+    opacity: .35;
+    text-decoration: line-through;
+    cursor: not-allowed;
+}
+
+/* Colour option values: the same round dots as the category filters. The extra resets
+   undo the text-chip base styles (min-width, borders, active fill) so the dot stays
+   perfectly round. */
+.sp-variant-value--swatch {
+    min-width: 0;
+    padding: 2px;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    opacity: 1;
+    line-height: 0;
+}
+.sp-variant-value--swatch.is-active {
+    background: transparent;
+    border-color: transparent;
+}
+.sp-variant-value--swatch .color-swatch {
+    position: relative;
+    display: block;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.18);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+    transition: transform .12s ease, box-shadow .12s ease;
+    background-size: cover;
+    background-position: center;
+}
+.sp-variant-value--swatch:hover .color-swatch {
+    transform: scale(1.12);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+}
+.sp-variant-value--swatch.is-active .color-swatch {
+    box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--main-color, #333333);
+}
+.sp-variant-value--swatch.is-active .color-swatch::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 5px;
+    height: 9px;
+    margin: -6px 0 0 -3px;
+    border: solid #ffffff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.65));
+}
+.sp-variant-value--swatch.is-unavailable {
+    opacity: .35;
+    cursor: not-allowed;
+}
+
+/* Only surfaces when the chosen combination is unavailable, so it stays quiet. */
+.sp-variant-availability { margin-top: .5rem; font-size: .9rem; color: #b00020; font-weight: 600; }
+.sp-variant-availability[hidden] { display: none; }
+/* ===== end SPD-2051 product variant options ===== */
