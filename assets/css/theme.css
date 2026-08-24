@@ -766,10 +766,11 @@ main {
     gap: 1.5rem;
 }
 
-/* Quantity + add-to-cart on one aligned row, beneath the variant options. */
+/* Quantity + add-to-cart on one aligned row, beneath the variant options. Both
+   stretch to the same height so the input and button line up. */
 .product-buy {
     display: flex;
-    align-items: flex-end;
+    align-items: stretch;
     gap: 1rem;
 }
 
@@ -964,12 +965,11 @@ textarea {
 
 .product-quantity {
     display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
     width: 90px;
 }
 
 .product-quantity input[type="number"] {
+    width: 100%;
     text-align: center;
 }
 
