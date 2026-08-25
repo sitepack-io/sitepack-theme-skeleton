@@ -93,17 +93,8 @@
                     <form action="/cart/add" method="post" class="product-add-to-cart">
                         {% app_block 'product_form_before' %}
 
-                        {# SPD-2051 new single-product options & variants selector. #}
-                        {% if product.optionSet and product.optionSet.options|length > 0 %}
-                            {% include 'snippets/product-variant-options.twig' %}
-                        {% endif %}
-
-                        {# Simplified variant handling (legacy linked-product variants) #}
-                        {% if product.variants.totalProducts > 1 %}
-                            <div class="product-variants">
-                                {# You would typically loop through attributes here #}
-                            </div>
-                        {% endif %}
+                        {# Variant/options picker + product_variants_before/after app_blocks. #}
+                        {{ sitepack_product_options() }}
 
                         <div class="product-buy">
                             <div class="product-quantity">

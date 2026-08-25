@@ -111,8 +111,8 @@ sitepack_content               sitepack_elements           sitepack_content_lega
 sitepack_footer                sitepack_legal_links        sitepack_copyright
 sitepack_icon                  sitepack_live_search        sitepack_live_search_icon
 sitepack_shopping_cart_icon    sitepack_price              sitepack_cart
-sitepack_category_filters      app_block                   csrf_token
-calculate_text_color           calculate_brightness
+sitepack_category_filters      sitepack_product_options    app_block
+csrf_token                     calculate_text_color        calculate_brightness
 ```
 
 ### Allowed object access
