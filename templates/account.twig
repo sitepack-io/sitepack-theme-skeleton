@@ -2,50 +2,104 @@
 
 {% block content %}
     {% app_block 'account_before' %}
-    <div class="container-element">
-        <h1>{{ 'account.title' | trans }}</h1>
+    <div class="container-element account">
+        {% if customer %}
+            {# ---------------------------------------------------------------
+               Logged in: the account dashboard.
+               --------------------------------------------------------------- #}
+            <h1>{{ 'account.title' | trans }}</h1>
 
-        <div class="account-dashboard">
-            {% app_block 'account_dashboard_start' %}
-            <h2>{{ 'account.welcome_customer' | trans({'%name%': customer.first_name ~ ' ' ~ customer.last_name}) }}</h2>
-            <p>{{ 'account.email' | trans({'%email%': customer.email}) }}</p>
+            <div class="account-dashboard">
+                {% app_block 'account_dashboard_start' %}
+                <h2>{{ 'account.welcome_customer' | trans({'%name%': customer.firstName ~ ' ' ~ customer.lastName}) }}</h2>
+                <p>{{ 'account.email' | trans({'%email%': customer.email}) }}</p>
 
-            <h3>{{ 'account.orders' | trans }}</h3>
-            <div class="order-history">
-                {% for order in customer.orders %}
-                    {% app_block 'account_order_before' %}
-                    <div class="order-item">
-                        <p>{{ 'account.order_item' | trans({'%id%': order.id, '%date%': order.created_at | date('M d, Y'), '%status%': order.status}) }}</p>
-                        <a href="{{ order.url }}">{{ 'account.view_details' | trans }}</a>
-                    </div>
-                    {% app_block 'account_order_after' %}
-                {% else %}
-                    <p>{{ 'account.no_orders' | trans }}</p>
-                {% endfor %}
-            </div>
-
-            <h3>{{ 'account.addresses' | trans }}</h3>
-            <div class="account-addresses">
-                {% if customer.addresses %}
-                    {% for address in customer.addresses %}
-                        {% app_block 'account_address_before' %}
-                        <div class="address-item">
-                            <p>{{ address.street }} {{ address.house_number }}</p>
-                            <p>{{ address.zipcode }} {{ address.city }}</p>
-                            <p>{{ address.country }}</p>
+                <h3>{{ 'account.orders' | trans }}</h3>
+                <div class="order-history">
+                    {% for order in orders|default([]) %}
+                        {% app_block 'account_order_before' %}
+                        <div class="order-item">
+                            <p>{{ 'account.order_item' | trans({'%id%': order.orderNumber, '%date%': order.created|date('M d, Y'), '%status%': order.status}) }}</p>
+                            <a href="{{ sitepack_account_slug('orders/' ~ order.uuid) }}">{{ 'account.view_details' | trans }}</a>
                         </div>
-                        {% app_block 'account_address_after' %}
+                        {% app_block 'account_order_after' %}
+                    {% else %}
+                        <p>{{ 'account.no_orders' | trans }}</p>
                     {% endfor %}
-                {% else %}
-                    <p>{{ 'account.no_addresses' | trans }}</p>
+                </div>
+
+                <div class="account-actions">
+                    <a href="{{ sitepack_account_slug('settings') }}">{{ 'account.settings' | trans }}</a>
+                    <a href="{{ sitepack_account_slug('logout') }}">{{ 'account.logout' | trans }}</a>
+                </div>
+                {% app_block 'account_dashboard_end' %}
+            </div>
+        {% else %}
+            {# ---------------------------------------------------------------
+               Logged out: login / register, rendered inside the theme chrome.
+               The login form posts to the SitePack authenticator; the register
+               form posts the customer_account_register[...] fields the standard
+               SitePack form binds, with a matching CSRF token.
+               --------------------------------------------------------------- #}
+            <h1>{{ 'account.login_title' | trans }}</h1>
+
+            {% if error %}
+                <div class="account-auth__error">{{ error }}</div>
+            {% endif %}
+
+            <div class="account-auth">
+                {% app_block 'account_login_before' %}
+                <form class="account-auth__form" method="post" action="{{ sitepack_account_slug('login') }}">
+                    <h2>{{ 'account.login_heading' | trans }}</h2>
+                    <input type="hidden" name="_target_path" value="{{ target|default('') }}"/>
+                    <label class="account-auth__field">
+                        <span>{{ 'account.email_label' | trans }}</span>
+                        <input type="email" name="_username" value="{{ last_username|default('') }}" required/>
+                    </label>
+                    <label class="account-auth__field">
+                        <span>{{ 'account.password_label' | trans }}</span>
+                        <input type="password" name="_password" required/>
+                    </label>
+                    <button type="submit" class="account-auth__submit">{{ 'account.login_submit' | trans }}</button>
+                </form>
+                {% app_block 'account_login_after' %}
+
+                {% if customerAccountsRegister %}
+                    {% app_block 'account_register_before' %}
+                    <form class="account-auth__form" method="post" action="{{ sitepack_account_slug('register') }}">
+                        <h2>{{ 'account.register_heading' | trans }}</h2>
+
+                        {% for message in register_errors|default([]) %}
+                            <div class="account-auth__error">{{ message }}</div>
+                        {% endfor %}
+
+                        <input type="hidden" name="customer_account_register[_token]" value="{{ csrf_token('customer_account_register') }}"/>
+                        <label class="account-auth__field">
+                            <span>{{ 'account.first_name_label' | trans }}</span>
+                            <input type="text" name="customer_account_register[first_name]" required/>
+                        </label>
+                        <label class="account-auth__field">
+                            <span>{{ 'account.last_name_label' | trans }}</span>
+                            <input type="text" name="customer_account_register[last_name]" required/>
+                        </label>
+                        <label class="account-auth__field">
+                            <span>{{ 'account.email_label' | trans }}</span>
+                            <input type="email" name="customer_account_register[email]" required/>
+                        </label>
+                        <label class="account-auth__field">
+                            <span>{{ 'account.password_label' | trans }}</span>
+                            <input type="password" name="customer_account_register[password]" required/>
+                        </label>
+                        <label class="account-auth__field">
+                            <span>{{ 'account.repeat_password_label' | trans }}</span>
+                            <input type="password" name="customer_account_register[repeat_password]" required/>
+                        </label>
+                        <button type="submit" name="customer_account_register[submit]" class="account-auth__submit">{{ 'account.register_submit' | trans }}</button>
+                    </form>
+                    {% app_block 'account_register_after' %}
                 {% endif %}
             </div>
-
-            <div class="account-actions">
-                <a href="/account/logout">{{ 'account.logout' | trans }}</a>
-            </div>
-            {% app_block 'account_dashboard_end' %}
-        </div>
+        {% endif %}
     </div>
     {% app_block 'account_after' %}
 {% endblock %}

@@ -48,7 +48,18 @@
     "no_orders": "You haven't placed any orders yet.",
     "addresses": "Addresses",
     "no_addresses": "No addresses found.",
-    "logout": "Logout"
+    "settings": "Account settings",
+    "logout": "Logout",
+    "login_title": "Sign in to your account",
+    "login_heading": "Registered customers",
+    "register_heading": "New customers",
+    "email_label": "Email address",
+    "password_label": "Password",
+    "repeat_password_label": "Repeat password",
+    "first_name_label": "First name",
+    "last_name_label": "Last name",
+    "login_submit": "Log in",
+    "register_submit": "Create account"
   },
   "sitemap": {
     "title": "Sitemap",
