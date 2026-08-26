@@ -59,7 +59,18 @@
     "first_name_label": "Voornaam",
     "last_name_label": "Achternaam",
     "login_submit": "Inloggen",
-    "register_submit": "Account aanmaken"
+    "register_submit": "Account aanmaken",
+    "nav_dashboard": "Overzicht",
+    "recent_orders": "Recente bestellingen",
+    "view_all_orders": "Alle bestellingen bekijken",
+    "order_number": "Bestelling #%number%",
+    "paid": "Betaald",
+    "unpaid": "Niet betaald",
+    "back_to_orders": "Terug naar bestellingen",
+    "order_date": "Datum",
+    "order_status": "Status",
+    "order_payment": "Betaalmethode",
+    "save": "Wijzigingen opslaan"
   },
   "sitemap": {
     "title": "Sitemap",
