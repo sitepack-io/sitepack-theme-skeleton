@@ -59,7 +59,18 @@
     "first_name_label": "First name",
     "last_name_label": "Last name",
     "login_submit": "Log in",
-    "register_submit": "Create account"
+    "register_submit": "Create account",
+    "nav_dashboard": "Dashboard",
+    "recent_orders": "Recent orders",
+    "view_all_orders": "View all orders",
+    "order_number": "Order #%number%",
+    "paid": "Paid",
+    "unpaid": "Unpaid",
+    "back_to_orders": "Back to orders",
+    "order_date": "Date",
+    "order_status": "Status",
+    "order_payment": "Payment method",
+    "save": "Save changes"
   },
   "sitemap": {
     "title": "Sitemap",
