@@ -83,7 +83,7 @@
             {% if product.shortDescription %}
                 {% app_block 'product_short_description_before' %}
                 <div class="product-short-description">
-                    {{ product.shortDescription | raw }}
+                    {{ product.shortDescription | sitepack_html }}
                 </div>
                 {% app_block 'product_short_description_after' %}
             {% endif %}
@@ -122,7 +122,7 @@
                     </summary>
                     <div class="accordion-content">
                         {% app_block 'product_description_before' %}
-                        {{ product.description | raw }}
+                        {{ product.description | sitepack_html }}
                         {% app_block 'product_description_after' %}
                     </div>
                 </details>
