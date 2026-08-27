@@ -1,19 +1,38 @@
 {% extends 'layouts/base.twig' %}
 
+{# SitePack renders a single blog post through this template, with the post exposed
+   as `content` (a blog content model). There is no `blog.articles` listing and no
+   separate blog index route — an overview is a content page with a blog element,
+   rendered through page.twig. #}
 {% block content %}
     {% app_block 'blog_before' %}
-    <div class="container-element">
-        <h1>{{ blog.title }}</h1>
+    <article class="blog-post container-element">
+        <h1>{{ content.name }}</h1>
+        <p class="article-meta">{{ 'general.published_on' | trans({'%date%': content.created | date('M d, Y')}) }}{% if content.author %} {{ 'general.by' | trans({'%author%': (content.author.firstName ~ ' ' ~ content.author.lastName)|trim}) }}{% endif %}</p>
 
-        <div class="blog-posts">
-            {% for article in blog.articles %}
-                {% app_block 'blog_article_before' %}
-                {% include 'snippets/blog-card.twig' with { article: article } %}
-                {% app_block 'blog_article_after' %}
-            {% else %}
-                <p>{{ 'general.no_posts' | trans }}</p>
-            {% endfor %}
+        {% if content.image %}
+            <div class="article-image">
+                {% app_block 'article_image_before' %}
+                <img src="{{ content.image }}" alt="{{ content.name }}">
+                {% app_block 'article_image_after' %}
+            </div>
+        {% endif %}
+
+        <div class="article-content">
+            {% app_block 'article_content_before' %}
+            {{ sitepack_content() }}
+            {% app_block 'article_content_after' %}
         </div>
-    </div>
+
+        {% if content.tags|length >= 1 %}
+            <div class="article-tags">
+                {% for tag in content.tags %}
+                    {% app_block 'article_tag_before' %}
+                    <a class="tag" href="{{ tag.url }}">{{ tag.tag }}</a>
+                    {% app_block 'article_tag_after' %}
+                {% endfor %}
+            </div>
+        {% endif %}
+    </article>
     {% app_block 'blog_after' %}
 {% endblock %}
