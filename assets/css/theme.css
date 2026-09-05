@@ -159,13 +159,18 @@ header .nav-shopping-cart {
 }
 
 /* Dropdown Styles */
+/* The menu is absolutely positioned inside its (narrow) parent li, so a shrink-to-fit
+   width would be capped at that li's width and long labels would run out of the box.
+   max-content sizes it to its widest item instead; very long labels wrap at max-width. */
 .dropdown-menu {
     display: none;
     position: absolute;
     top: 100%;
     left: 0;
+    width: max-content;
+    min-width: 100%;
+    max-width: 20rem;
     background: var(--card-background-color);
-    min-width: 180px;
     box-shadow: 0 4px 12px color-mix(in srgb, var(--shadow-color) 8%, transparent);
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
@@ -187,6 +192,7 @@ header .nav-shopping-cart {
     padding: 0.5rem 1rem;
     color: var(--header-text-color);
     display: block;
+    white-space: normal;
     font-weight: 400;
     border-radius: 0;
 }
@@ -301,13 +307,12 @@ main {
     padding: 0 1.5rem;
 }
 
-/* Category Layout Sidebar + Grid */
+/* Category Layout Sidebar + Grid (width and gutter come from .container-element) */
 .category-main-layout {
     display: flex;
+    align-items: flex-start;
     gap: 2rem;
-    max-width: var(--container-width);
-    margin: 2rem auto;
-    padding: 0 1.5rem;
+    margin: 1.5rem auto 2rem;
 }
 
 .category-sidebar {
@@ -316,6 +321,7 @@ main {
 
 .category-products-content {
     flex: 1;
+    min-width: 0;
 }
 
 /* Ensure product grid inside content doesn't double margin/max-width */
@@ -489,11 +495,75 @@ main {
     background-color: var(--blog-background-color);
 }
 
-.category-description {
-    background-color: var(--category-background-color);
-    padding: 1rem;
-    border-radius: var(--border-radius);
+/* Quick filters (sub-category links) */
+.category-quick-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem auto 0;
+}
+
+.category-quick-filters .btn-default {
+    color: var(--link-color);
+    background-color: var(--surface-color);
+    border-color: transparent;
+}
+
+.category-quick-filters .btn-default:hover {
+    color: var(--link-active-color);
+    filter: brightness(96%);
+}
+
+/* Toolbar: product count, clear link and sort select above the grid */
+.category-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem 1.5rem;
     margin-bottom: 1rem;
+}
+
+.category-toolbar__meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--muted-text-color);
+    font-size: 0.9rem;
+}
+
+.category-sort {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0;
+    font-weight: 400;
+    font-size: 0.9rem;
+}
+
+.category-sort select {
+    width: auto;
+    padding: 0.4rem 2rem 0.4rem 0.75rem;
+}
+
+/* Pagination */
+.category-pagination {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+}
+
+.category-pagination .btn-primary {
+    width: auto;
+    padding: 0.5rem 0.75rem;
+    cursor: default;
+}
+
+.category-pagination__gap {
+    color: var(--subtle-text-color);
 }
 
 .category-sub-categories {
@@ -1325,7 +1395,7 @@ textarea {
     font-weight: 700;
 }
 
-/* Sidebar toggle button spacing */
+/* Sidebar toggle button: mobile only */
 #sidebar-filter-toggle {
     margin: 0 0 1rem 0;
     display: none;
@@ -1346,6 +1416,10 @@ textarea {
 
     #sidebar-category-filters.show {
         display: block;
+    }
+
+    .category-toolbar {
+        justify-content: flex-start;
     }
 }
 
@@ -1386,6 +1460,7 @@ textarea {
     margin: 0;
     padding: 0.5rem 0;
     font-size: 1rem;
+    border-bottom: 1px solid var(--border-color);
 }
 
 /* Collapsible header link */
@@ -1488,6 +1563,176 @@ textarea {
 
 .category-filter-link:hover i {
     color: var(--main-color);
+}
+
+/* Attribute filter options (checkbox-style links rendered by the platform) */
+.category-filter-options li a {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    padding: .25rem .35rem;
+    border-radius: var(--border-radius);
+    color: inherit;
+    text-decoration: none;
+}
+
+.category-filter-options li a:hover,
+.category-filter-options li a:focus {
+    background: var(--surface-color);
+    color: var(--main-color);
+    text-decoration: none;
+}
+
+.category-filter-options li a i {
+    color: var(--subtle-text-color);
+}
+
+/* Colour filters render as swatches; the colour itself arrives inline from the platform. */
+.category-filter-swatches {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.category-filter-swatches li {
+    margin: 0;
+}
+
+.category-filter-swatches .swatch-fallback {
+    order: 1;
+    flex-basis: 100%;
+}
+
+.category-filter-swatches .color-swatch-link {
+    display: inline-flex;
+    padding: 2px;
+    border-radius: 50%;
+}
+
+.category-filter-swatches .color-swatch {
+    display: block;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1px solid color-mix(in srgb, var(--text-color) 20%, transparent);
+    background-size: cover;
+    background-position: center;
+}
+
+.category-filter-swatches .color-swatch-link.is-active .color-swatch {
+    box-shadow: 0 0 0 2px var(--card-background-color), 0 0 0 4px var(--main-color);
+}
+
+/* Price range filter: the platform renders two range inputs plus a track and fill span.
+   Stacking both inputs on the same track turns them into a single two-handle slider. */
+.filter-price .price-range {
+    padding-top: 0.5rem;
+}
+
+.filter-price .price-range-values {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.filter-price .price-range-sliders {
+    position: relative;
+    height: 22px;
+    margin-bottom: 0.75rem;
+}
+
+/* Inset by half a thumb: that is where a thumb's centre sits at min and max. */
+.filter-price .price-range-track {
+    display: block;
+    position: absolute;
+    top: 9px;
+    left: 8px;
+    right: 8px;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--border-color);
+}
+
+.filter-price .price-range-track-fill {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-radius: 2px;
+    background: var(--main-color);
+}
+
+/* Only the thumbs take pointer events, otherwise the top input swallows every click
+   meant for the one underneath. */
+.filter-price input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 22px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    pointer-events: none;
+}
+
+.filter-price input[type="range"]:focus {
+    outline: 0;
+}
+
+.filter-price input[type="range"]::-webkit-slider-runnable-track {
+    height: 22px;
+    border: 0;
+    background: transparent;
+}
+
+.filter-price input[type="range"]::-moz-range-track {
+    height: 22px;
+    border: 0;
+    background: transparent;
+}
+
+.filter-price input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    pointer-events: all;
+    box-sizing: border-box;
+    width: 16px;
+    height: 16px;
+    margin-top: 3px;
+    border: 2px solid var(--main-color);
+    border-radius: 50%;
+    background: var(--card-background-color);
+    box-shadow: 0 1px 2px color-mix(in srgb, var(--shadow-color) 30%, transparent);
+    cursor: pointer;
+}
+
+.filter-price input[type="range"]::-moz-range-thumb {
+    pointer-events: all;
+    box-sizing: border-box;
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--main-color);
+    border-radius: 50%;
+    background: var(--card-background-color);
+    box-shadow: 0 1px 2px color-mix(in srgb, var(--shadow-color) 30%, transparent);
+    cursor: pointer;
+}
+
+.filter-price input[type="range"]:focus-visible::-webkit-slider-thumb {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--main-color) 25%, transparent);
+}
+
+.filter-price input[type="range"]:focus-visible::-moz-range-thumb {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--main-color) 25%, transparent);
 }
 
 /* The customer account page is rendered by {{ sitepack_account() }}, which ships its

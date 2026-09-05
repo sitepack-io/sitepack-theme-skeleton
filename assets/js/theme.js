@@ -125,15 +125,24 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Sidebar filter toggle (Mobile)
+    // Sidebar filter toggle (mobile)
     const sidebarToggle = document.getElementById('sidebar-filter-toggle');
     const sidebarFilters = document.getElementById('sidebar-category-filters');
 
     if (sidebarToggle && sidebarFilters) {
         sidebarToggle.addEventListener('click', function() {
-            sidebarFilters.classList.toggle('show');
-            const isVisible = sidebarFilters.classList.contains('show');
-            this.innerHTML = isVisible ? '<i class="fas fa-filter"></i> ' + (window.SITEPACK_TRANS?.category?.hide_filters || 'Hide filters') : '<i class="fas fa-filter"></i> ' + (window.SITEPACK_TRANS?.category?.show_filters || 'Show filters');
+            const isVisible = sidebarFilters.classList.toggle('show');
+            const trans = window.SITEPACK_TRANS?.category || {};
+            this.textContent = isVisible ? (trans.hide_filters || 'Hide filters') : (trans.show_filters || 'Show filters');
+        });
+    }
+
+    // Category sort: the platform stores the direction in the session and redirects back.
+    const categorySort = document.getElementById('category-sort');
+    if (categorySort) {
+        categorySort.addEventListener('change', function() {
+            window.location.href = '/store/api/category-sort?direction=' + encodeURIComponent(this.value)
+                + '&url=' + encodeURIComponent(this.getAttribute('data-url'));
         });
     }
 
