@@ -48,7 +48,16 @@
   "category": {
     "filters_title": "Filters",
     "show_filters": "Filters tonen",
-    "hide_filters": "Filters verbergen"
+    "hide_filters": "Filters verbergen",
+    "products_count": "%count% producten",
+    "clear_filters": "Filters wissen",
+    "sort": "Sorteer op",
+    "sort_popularity": "Populariteit",
+    "sort_price_asc": "Prijs: laag naar hoog",
+    "sort_price_desc": "Prijs: hoog naar laag",
+    "pagination": "Paginering",
+    "previous": "Vorige",
+    "next": "Volgende"
   },
   "error": {
     "404_title": "Pagina niet gevonden (404)",

@@ -48,7 +48,16 @@
   "category": {
     "filters_title": "Filters",
     "show_filters": "Show filters",
-    "hide_filters": "Hide filters"
+    "hide_filters": "Hide filters",
+    "products_count": "%count% products",
+    "clear_filters": "Clear filters",
+    "sort": "Sort by",
+    "sort_popularity": "Popularity",
+    "sort_price_asc": "Price: low to high",
+    "sort_price_desc": "Price: high to low",
+    "pagination": "Pagination",
+    "previous": "Previous",
+    "next": "Next"
   },
   "error": {
     "404_title": "Page Not Found (404)",
