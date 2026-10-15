@@ -1233,6 +1233,20 @@ textarea {
     cursor: pointer;
 }
 
+/* Cookie bar (sitepack_cookies()): "Reject all" and "Accept selection" are .btn-default.
+   The basic .btn helper further down sets a transparent border that would wipe out the
+   .btn-default border, so both buttons looked like plain text next to "Accept all". */
+.sitepack-cookiebar .cookie-actions .btn-default {
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    border: 1px solid var(--input-border-color);
+    padding: 0.5rem 1rem;
+}
+
+.sitepack-cookiebar .cookie-actions .btn-default:hover {
+    border-color: var(--text-color);
+}
+
 /* Cookie Bar */
 #cookiebar {
     position: fixed;
