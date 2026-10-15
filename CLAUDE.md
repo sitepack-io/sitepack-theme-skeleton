@@ -261,8 +261,10 @@ Fonts are applied globally by the generated stylesheet — do not set `font-fami
 Every setting needs `key`, `type` and `default`; add a human-readable `label` so the admin
 UI is understandable.
 
-Note: `theme_setting()` reads the theme's *declared* settings, not the merchant's saved
-values. To style with a merchant value, always go through the CSS variable.
+`theme_setting(theme_config, 'key')` returns the merchant's saved value, then the declared
+default (older platform versions return nothing: always add `|default(...)`). It is meant
+for content settings (`text`); to style with a merchant value, always go through the CSS
+variable.
 
 ### Custom templates
 

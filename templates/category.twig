@@ -79,6 +79,11 @@
                         {% app_block 'product_card_before' %}
                         {% include 'snippets/product-card.twig' with { product: product } %}
                         {% app_block 'product_card_after' %}
+                        {# Optional promo slot for apps (e.g. a "book a test ride" band); give
+                           anything rendered here the full grid row in theme.css. #}
+                        {% if loop.index == 3 or (loop.last and loop.length < 3) %}
+                            {% app_block 'category_grid_promo' %}
+                        {% endif %}
                     {% endfor %}
                 </div>
             {% else %}

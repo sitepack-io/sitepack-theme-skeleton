@@ -110,6 +110,10 @@
                         {% app_block 'product_form_after' %}
                     </form>
                 {% endif %}
+
+                {# Second call to action from an app (e.g. "book a test ride"); outside the
+                   form so a button there can never submit the cart. #}
+                {% app_block 'product_secondary_actions' %}
             </div>
 
             {% app_block 'product_usps' %}

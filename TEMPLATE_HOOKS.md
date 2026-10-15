@@ -48,12 +48,14 @@ This file documents the available `app_block` hooks in the theme. These hooks al
 - `product_downloads_after`: After the product downloads accordion.
 - `product_form_before`: Inside the add-to-cart form, before the inputs.
 - `product_form_after`: Inside the add-to-cart form, after the button.
+- `product_secondary_actions`: Under the add-to-cart form, outside it, for a second call to action from an app (e.g. book a test ride).
 - `product_recommendations_before`: Before the product recommendations section (cross-sells, related).
 - `product_recommendations_after`: After the product recommendations section.
 
 ## Category Page Hooks (templates/category.twig)
 
 - `category_before`: At the start of the category page content.
+- `category_grid_promo`: Inside the product grid after the third card (after the last when there are fewer); meant to span the full row (e.g. a promo band from an app).
 - `category_after`: At the end of the category page content.
 
 ## Product Overview Hooks (templates/products.twig)
