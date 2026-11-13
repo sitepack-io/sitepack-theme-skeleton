@@ -2,6 +2,14 @@
 
 This file documents the available `app_block` hooks in the theme. These hooks allow developers to inject custom functionality at specific positions in the rendering process.
 
+A hook renders, in this order: the platform's own fragments (the CSRF token in `product_form_before`, the merchant's body code in `body_start`), the installed apps, and the blocks merchants build under **Theme > Blocks** and place on a hook.
+
+Rules:
+
+- **Use a literal name**: `{% app_block 'footer_before' %}`. SitePack reads the hook names out of the templates on sync and publish; a name built from a variable is not picked up, so merchants cannot place blocks on it.
+- **The hooks below are required** unless marked otherwise. `sitepack theme:verify` checks them offline, and `sitepack theme:publish` refuses a theme that misses one. A hook may live in a snippet, as long as the page renders it.
+- Add your own hooks with clear names (`home_hero_after`) and in `_before` / `_after` pairs: merchants pick from them by name.
+
 ## Global Hooks (layouts/base.twig)
 
 - `head_after`: Just before the closing `</head>` tag.
@@ -75,19 +83,17 @@ The cart table itself is rendered by `sitepack_cart()`, not by the theme, so the
 cannot expose per-line-item hooks (`cart_item_*`, `cart_buttons_after`). Wrap the whole
 cart with `cart_before` / `cart_after` instead.
 
-## Blog Page Hooks (templates/blog.twig)
+## Blog Page Hooks (templates/blog.twig, snippets/blog-card.twig)
 
-- `blog_before`: At the start of the blog listing page content.
-- `blog_after`: At the end of the blog listing page content.
-- `blog_article_before`: Before each article summary in the blog listing.
-- `blog_article_after`: After each article summary in the blog listing.
-- `blog_article_image_before`: Before the article image in the blog listing.
-- `blog_article_image_after`: After the article image in the blog listing.
+The storefront renders both the blog listing and a single blog post with `templates/blog.twig`.
 
-## Article Page Hooks (templates/article.twig)
+- `blog_before`: At the start of the blog page content.
+- `blog_after`: At the end of the blog page content.
+- `blog_article_image_before`: Before the article image of each card in the listing (snippets/blog-card.twig).
+- `blog_article_image_after`: After the article image of each card in the listing.
 
-- `article_before`: At the start of the article page content.
-- `article_after`: At the end of the article page content.
+## Single Article Hooks (templates/blog.twig)
+
 - `article_image_before`: Before the main article image.
 - `article_image_after`: After the main article image.
 - `article_content_before`: Before the main article content.
@@ -95,7 +101,11 @@ cart with `cart_before` / `cart_after` instead.
 - `article_tag_before`: Before each tag in the article.
 - `article_tag_after`: After each tag in the article.
 
-## Account Page Hooks (templates/account.twig)
+`templates/article.twig` carries the same hooks plus `article_before` / `article_after`, but the storefront does not render it: keep the single post hooks in `blog.twig`.
+
+## Account Page Hooks (rendered by sitepack_account())
+
+`templates/account.twig` only calls `{{ sitepack_account() }}`, which renders these hooks itself. Do not add them to the theme; they are not part of the required check.
 
 - `account_before`: At the start of the account page content.
 - `account_after`: At the end of the account page content.
@@ -123,7 +133,9 @@ cart with `cart_before` / `cart_after` instead.
 - `tag_article_before`: Before each article summary in the tag listing.
 - `tag_article_after`: After each article summary in the tag listing.
 
-## Landing Page Hooks (templates/landing-page.twig)
+## Landing Page Hooks (templates/landing-page.twig, optional)
+
+Only for a theme that ships the landing page template; not part of the required check.
 
 - `landing_before`: At the start of the landing page content, before the hero section.
 - `landing_after`: At the end of the landing page content, after the features section.
