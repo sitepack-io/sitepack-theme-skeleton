@@ -83,25 +83,23 @@ The cart table itself is rendered by `sitepack_cart()`, not by the theme, so the
 cannot expose per-line-item hooks (`cart_item_*`, `cart_buttons_after`). Wrap the whole
 cart with `cart_before` / `cart_after` instead.
 
-## Blog Page Hooks (templates/blog.twig, snippets/blog-card.twig)
+## Blog Card Hooks (snippets/blog-card.twig)
 
-The storefront renders both the blog listing and a single blog post with `templates/blog.twig`.
+- `blog_article_image_before`: Before the post image in a blog card.
+- `blog_article_image_after`: After the post image in a blog card.
 
-- `blog_before`: At the start of the blog page content.
-- `blog_after`: At the end of the blog page content.
-- `blog_article_image_before`: Before the article image of each card in the listing (snippets/blog-card.twig).
-- `blog_article_image_after`: After the article image of each card in the listing.
+## Blog Post Hooks (templates/blog.twig)
 
-## Single Article Hooks (templates/blog.twig)
+`templates/blog.twig` renders a single blog post at `/blog/<slug>`. There is no separate article template.
 
+- `blog_before`: At the start of the blog post page.
+- `blog_after`: At the end of the blog post page.
 - `article_image_before`: Before the main article image.
 - `article_image_after`: After the main article image.
 - `article_content_before`: Before the main article content.
 - `article_content_after`: After the main article content.
 - `article_tag_before`: Before each tag in the article.
 - `article_tag_after`: After each tag in the article.
-
-`templates/article.twig` carries the same hooks plus `article_before` / `article_after`, but the storefront does not render it: keep the single post hooks in `blog.twig`.
 
 ## Account Page Hooks (rendered by sitepack_account())
 
