@@ -305,7 +305,7 @@ remote scripts from templates — ship assets under `assets/`.
 
 ### Templates
 
-Ship all of: `404`, `account`, `article`, `blog`, `cart`, `category`, `index`, `legal`,
+Ship all of: `404`, `account`, `blog`, `cart`, `category`, `index`, `legal`,
 `page`, `product`, `products`, `search`, `sitemap`, `tag`, plus any custom template
 declared in `theme.json`. `products.twig` and `search.twig` are technically optional
 (missing ones fall back to `page.twig`, which renders the chrome but no listing) — a
@@ -336,8 +336,7 @@ tag, page-aware on translated sites. Do not derive it from `site.locale`, which 
 | `category.twig` | `category`, `products`, `sub_categories`, `quick_filters`, `total_products`, `total_pages`, `current_page` |
 | `products.twig` | `products`, `sub_categories` |
 | `search.twig` | `keywords`, `results` (each with `type`, `url`, `title`, `description`, `image`, `price`) |
-| `blog.twig` | `blog.articles` |
-| `article.twig` | `article` (`.title`, `.content`, `.image`, `.tags`, `.created`, `.author`) |
+| `blog.twig` | one blog post as `content` (`.name`, `.image`, `.created`, `.author`, `.tags`); body via `sitepack_content()`. A blog overview is a regular page with a blog element (`page.twig`) |
 | `tag.twig` | `tag.title`, `tag.blogs` |
 | `cart.twig` | `cart` (`.totalProducts`, `.totalValue`, `.items`) — render with `sitepack_cart()` |
 | `account.twig` | `customer` (`.firstName`, `.lastName`, `.email`) |
